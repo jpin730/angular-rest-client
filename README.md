@@ -30,7 +30,7 @@ yarn build
 
 ## App hosting
 
-https://jpin730-angular-rest-client.vercel.com
+https://angular-rest-client-jpin730.vercel.app
 
 ## Backend Repository
 
