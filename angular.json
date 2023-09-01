@@ -13,7 +13,7 @@
         "@schematics/angular:component": {
           "inlineTemplate": false,
           "inlineStyle": true,
-          "style": "scss",
+          "style": "css",
           "skipTests": true,
           "standalone": true
         },
@@ -53,9 +53,9 @@
             "main": "src/main.ts",
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
+            "inlineStyleLanguage": "css",
             "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.scss"],
+            "styles": ["src/styles.css"],
             "scripts": []
           },
           "configurations": {
