@@ -1,2 +1,44 @@
-<p>dashboard-layout works!</p>
-<router-outlet />
+<mat-sidenav-container class="h-full">
+  <mat-sidenav
+    #sidenav
+    [mode]="isMobile ? 'over' : 'side'"
+    [opened]="isMobile === false"
+    class="bg-sky-800">
+    <mat-nav-list class="flex h-full w-60 flex-col p-0">
+      <a
+        mat-list-item
+        *ngFor="let item of sidenavList"
+        class="h-16"
+        [routerLink]="item.link"
+        routerLinkActive="bg-sky-950"
+        [routerLinkActiveOptions]="{ exact: true }"
+        (isActiveChange)="isActiveChange($event, item)"
+        (click)="isMobile && sidenav.close()">
+        <div class="flex gap-3 text-white">
+          <mat-icon>{{ item.icon }}</mat-icon>
+          <span>{{ item.title }}</span>
+        </div>
+      </a>
+
+      <span class="grow"></span>
+
+      <mat-list-item class="h-16" (click)="logout()">
+        <div class="flex gap-3 text-white">
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
+        </div>
+      </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar class="justify-between bg-sky-800 md:border-b md:bg-white">
+      <h1 class="ml-2 text-white md:text-gray-900">{{ pageTitle }}</h1>
+      <button mat-icon-button class="block md:hidden" (click)="sidenav.toggle()">
+        <mat-icon class="text-white">menu</mat-icon>
+      </button>
+    </mat-toolbar>
+
+    <router-outlet />
+  </mat-sidenav-content>
+</mat-sidenav-container>
