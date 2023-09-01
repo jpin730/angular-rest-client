@@ -1,6 +1,6 @@
 # Angular Rest Client
 
-This project is for implementation of a REST Client with Angular (16.2.1) using standalone components. This app connects to multiple CRUD endpoints from a NodeJS (Express JS) backend, authentication with JWT and Google Identity and file upload endpoint for the user's avatar using Cloudinary.
+This project is for implementation of a REST Client with Angular (16.2.1) using [standalone components](https://angular.io/guide/standalone-components), Angular Material and TailwindCSS. This app connects to multiple CRUD endpoints from a NodeJS (Express JS) backend, authentication with JWT and Google Identity and file upload endpoint for the user's avatar using Cloudinary.
 
 ## Usage
 
