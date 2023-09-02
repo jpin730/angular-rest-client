@@ -1,27 +1,22 @@
-<<<<<<< Updated upstream
-<div class="mat-app-background flex min-h-screen items-center justify-center">
-  =======
-  <div class="flex min-h-screen items-center justify-center">
-    >>>>>>> Stashed changes
-    <div class="rounded border bg-white p-10">
-      <div class="mb-5">
-        <h1 class="mb-3 text-4xl">Angular REST Client</h1>
-        <hr />
-      </div>
-
-      <form [formGroup]="loginForm" (ngSubmit)="login()" class="flex flex-col">
-        <mat-form-field appearance="outline">
-          <mat-label>Email</mat-label>
-          <input matInput formControlName="email" />
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-          <mat-label>Password</mat-label>
-          <input matInput formControlName="password" />
-        </mat-form-field>
-
-        <button mat-raised-button color="primary" type="submit" [disabled]="false">Login</button>
-      </form>
+<div class="flex min-h-screen items-center justify-center">
+  <div class="rounded border bg-white p-10">
+    <div class="mb-5">
+      <h1 class="mb-3 text-4xl">Angular REST Client</h1>
+      <hr />
     </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="login()" class="flex flex-col">
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" />
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit" [disabled]="false">Login</button>
+    </form>
   </div>
 </div>
