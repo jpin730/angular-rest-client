@@ -11,8 +11,21 @@ body {
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
+  @apply text-gray-800;
 }
 
 .mdc-notched-outline__notch {
   border-right: none;
+}
+
+.toast-container .ngx-toastr {
+  @apply bg-white bg-none px-5 py-3 text-gray-800;
+
+  &.toast-error .toast-title {
+    @apply text-red-800;
+  }
+
+  .toast-close-button {
+    @apply text-gray-800;
+  }
 }
