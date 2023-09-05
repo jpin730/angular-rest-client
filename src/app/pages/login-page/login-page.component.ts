@@ -4,7 +4,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
-const imports = [MatFormFieldModule, MatInputModule, MatButtonModule, ReactiveFormsModule];
+import { FormFieldErrorsModule } from 'src/app/directives/form-field-errors/form-field-errors.module';
+
+const imports = [
+  FormFieldErrorsModule,
+  MatButtonModule,
+  MatFormFieldModule,
+  MatInputModule,
+  ReactiveFormsModule,
+];
 
 @Component({
   selector: 'app-login-page',
