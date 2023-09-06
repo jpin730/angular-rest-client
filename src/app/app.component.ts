@@ -15,6 +15,10 @@ export class AppComponent implements OnInit {
   private store = inject(Store);
 
   ngOnInit(): void {
-    this.store.dispatch(authActions.authenticate());
+    this.store.dispatch(
+      localStorage.getItem('token')
+        ? authActions.authenticate()
+        : authActions.authenticateFailure(),
+    );
   }
 }

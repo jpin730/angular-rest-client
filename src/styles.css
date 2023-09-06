@@ -23,7 +23,7 @@ body {
 }
 
 .toast-close-button {
-  @apply right-2 top-1;
+  @apply !right-2 !top-1;
 }
 
 .toast-title {
