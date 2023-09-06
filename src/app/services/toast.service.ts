@@ -14,7 +14,7 @@ export class ToastService {
   };
 
   error(message: string): ActiveToast<Toast> {
-    return this.toastr.error(message, 'ERROR', {
+    return this.toastr.error(message, 'Error', {
       ...this.baseConfig,
     });
   }

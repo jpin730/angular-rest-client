@@ -19,13 +19,21 @@ body {
 }
 
 .toast-container .ngx-toastr {
-  @apply bg-white bg-none px-5 py-3 text-gray-800;
+  @apply bg-white bg-none p-0 text-sm text-gray-800;
+}
 
-  &.toast-error .toast-title {
-    @apply text-red-800;
-  }
+.toast-close-button {
+  @apply right-2 top-1;
+}
 
-  .toast-close-button {
-    @apply text-gray-800;
-  }
+.toast-title {
+  @apply text-sm;
+}
+
+.toast-message {
+  @apply px-3 py-2 text-sm;
+}
+
+.toast-error .toast-title {
+  @apply bg-red-700 px-3 py-1 text-white;
 }
