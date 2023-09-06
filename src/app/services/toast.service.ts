@@ -8,7 +8,6 @@ export class ToastService {
   private toastr = inject(ToastrService);
   private baseConfig: Partial<IndividualConfig> = {
     closeButton: true,
-    extendedTimeOut: 5000,
     positionClass: 'toast-bottom-center',
     progressBar: true,
     tapToDismiss: false,

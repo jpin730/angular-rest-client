@@ -11,3 +11,12 @@ export enum BREAKPOINT {
 export const API_PARSED_ERROR_MESSAGES: ApiParsedErrorMessage[] = [
   { hint: 'token is invalid', message: 'Login required' },
 ];
+
+export enum PATH {
+  home = '',
+  login = 'login',
+  categories = 'categories',
+  products = 'products',
+  profile = 'profile',
+  users = 'users',
+}

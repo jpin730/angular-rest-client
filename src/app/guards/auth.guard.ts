@@ -3,6 +3,7 @@ import { CanActivateFn, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { fromAuth } from '../store/auth';
 import { filter, map, switchMap } from 'rxjs';
+import { PATH } from '../utils/constants';
 
 export const isAuthenticated: CanActivateFn = (_, state) => {
   const { url } = state;
@@ -14,9 +15,9 @@ export const isAuthenticated: CanActivateFn = (_, state) => {
     switchMap(() => store.select(fromAuth.hasUser)),
     map((hasUser) => {
       if (hasUser) {
-        return url.startsWith('/login') ? router.parseUrl('/') : true;
+        return url.includes(PATH.login) ? router.parseUrl(PATH.home) : true;
       } else {
-        return url.startsWith('/login') ? true : router.parseUrl('/login');
+        return url.includes(PATH.login) ? true : router.parseUrl(PATH.login);
       }
     }),
   );

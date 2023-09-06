@@ -1,3 +1,5 @@
-<div class="flex h-full items-center justify-center bg-transparent" *ngIf="isLoading$ | async">
+<div
+  class="absolute left-0 top-0 z-50 flex h-full w-full cursor-wait items-center justify-center bg-black/10"
+  *ngIf="isLoading$ | async">
   <mat-spinner color="accent" />
 </div>

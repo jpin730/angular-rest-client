@@ -1,5 +1,5 @@
 import { Component, DestroyRef, OnInit, inject } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
@@ -9,7 +9,7 @@ import { NgFor } from '@angular/common';
 
 import { SidenavListItem } from 'src/app/interfaces/side-nav-list-item';
 import { media } from 'src/app/utils/media';
-import { BREAKPOINT } from 'src/app/utils/constants';
+import { BREAKPOINT, PATH } from 'src/app/utils/constants';
 import { Subject, takeUntil } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { authActions } from 'src/app/store/auth/auth.action';
@@ -36,13 +36,12 @@ export class DashboardLayoutComponent implements OnInit {
   pageTitle = 'Dashboard';
   isMobile = false;
   sidenavList: SidenavListItem[] = [
-    { title: 'Dashboard', link: '/', icon: 'dashboard' },
-    { title: 'Profile', link: '/profile', icon: 'account_circle' },
-    { title: 'Users', link: '/users', icon: 'group' },
-    { title: 'Categories', link: '/categories', icon: 'category' },
-    { title: 'Products', link: '/products', icon: 'view_list' },
+    { title: 'Dashboard', link: PATH.home, icon: 'dashboard' },
+    { title: 'Profile', link: PATH.profile, icon: 'account_circle' },
+    { title: 'Users', link: PATH.users, icon: 'group' },
+    { title: 'Categories', link: PATH.categories, icon: 'category' },
+    { title: 'Products', link: PATH.products, icon: 'view_list' },
   ];
-  private router = inject(Router);
   private store = inject(Store);
   private destroyRef = inject(DestroyRef);
   private destroyed = new Subject<void>();
@@ -68,6 +67,5 @@ export class DashboardLayoutComponent implements OnInit {
 
   logout() {
     this.store.dispatch(authActions.logout());
-    this.router.navigateByUrl('/login');
   }
 }

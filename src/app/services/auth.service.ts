@@ -3,6 +3,7 @@ import { Injectable, inject } from '@angular/core';
 
 import { environment } from 'src/environments/environment.development';
 import { REFRESH_TOKEN } from '../interceptors/token.interceptor';
+import { GetAuthCheck, PostAuthLogin } from '../interfaces/api-auth-responses';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -11,6 +12,10 @@ export class AuthService {
 
   authenticate() {
     const context = new HttpContext().set(REFRESH_TOKEN, true);
-    return this.http.get(`${this.baseURL}/check`, { context });
+    return this.http.get<GetAuthCheck>(`${this.baseURL}/check`, { context });
+  }
+
+  login(email: string, password: string) {
+    return this.http.post<PostAuthLogin>(`${this.baseURL}/login`, { email, password });
   }
 }

@@ -14,8 +14,6 @@ export const errorHandlerInterceptor: HttpInterceptorFn = (req, next) => {
       const apiErrors: ApiErrorMessage[] | undefined = errorResponse.error.errors;
       if (apiErrors && Array.isArray(apiErrors)) {
         apiErrors.forEach(({ msg }) => toastService.error(parse(msg) || msg));
-      } else if (errorResponse.message) {
-        toastService.error(errorResponse.message);
       } else {
         toastService.error('Something went wrong, try again');
       }
