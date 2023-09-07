@@ -9,8 +9,9 @@ export const authActions = createActionGroup({
     'Authenticate Success': props<{ user: User }>(),
     'Authenticate Failure': emptyProps(),
     Login: props<{ email: string; password: string }>(),
+    'Login with Google': props<{ id_token: string }>(),
     'Login Success': props<{ user: User }>(),
     'Login Failure': emptyProps(),
-    Logout: emptyProps(),
+    Logout: props<{ user: User }>(),
   },
 });

@@ -3,7 +3,11 @@ import { Injectable, inject } from '@angular/core';
 
 import { environment } from 'src/environments/environment';
 import { REFRESH_TOKEN } from '../interceptors/token.interceptor';
-import { GetAuthCheck, PostAuthLogin } from '../interfaces/api-auth-responses';
+import {
+  GetAuthCheck,
+  PostAuthLogin,
+  PostAuthLoginWithGoogle,
+} from '../interfaces/api-auth-responses';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -17,5 +21,9 @@ export class AuthService {
 
   login(email: string, password: string) {
     return this.http.post<PostAuthLogin>(`${this.baseURL}/login`, { email, password });
+  }
+
+  loginWithGoogle(id_token: string) {
+    return this.http.post<PostAuthLoginWithGoogle>(`${this.baseURL}/google`, { id_token });
   }
 }

@@ -10,9 +10,11 @@ import { NgFor } from '@angular/common';
 import { SidenavListItem } from 'src/app/interfaces/side-nav-list-item';
 import { media$ } from 'src/app/utils/media';
 import { BREAKPOINT, PATH } from 'src/app/utils/constants';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, take, takeUntil } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { authActions } from 'src/app/store/auth/auth.action';
+import { fromAuth } from 'src/app/store/auth';
+import { User } from 'src/app/interfaces/user';
 
 const imports = [
   MatButtonModule,
@@ -33,6 +35,7 @@ const imports = [
   templateUrl: './dashboard-layout.component.html',
 })
 export class DashboardLayoutComponent implements OnInit {
+  user!: User;
   pageTitle = 'Dashboard';
   isMobile = false;
   sidenavList: SidenavListItem[] = [
@@ -45,6 +48,13 @@ export class DashboardLayoutComponent implements OnInit {
   private store = inject(Store);
   private destroyRef = inject(DestroyRef);
   private destroyed = new Subject<void>();
+
+  constructor() {
+    this.store
+      .select(fromAuth.user)
+      .pipe(take(1))
+      .subscribe((user) => (this.user = user));
+  }
 
   ngOnInit(): void {
     this.destroyRef.onDestroy(() => {
@@ -66,6 +76,6 @@ export class DashboardLayoutComponent implements OnInit {
   }
 
   logout() {
-    this.store.dispatch(authActions.logout());
+    this.store.dispatch(authActions.logout({ user: this.user }));
   }
 }

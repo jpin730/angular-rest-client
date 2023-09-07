@@ -11,3 +11,9 @@ export interface PostAuthLogin {
   token: string;
   refresh: string;
 }
+
+export interface PostAuthLoginWithGoogle {
+  user: User;
+  token: string;
+  refresh: string;
+}

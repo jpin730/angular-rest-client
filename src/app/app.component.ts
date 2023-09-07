@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(
-      localStorage.getItem('token')
+      localStorage.getItem('refresh')
         ? authActions.authenticate()
         : authActions.authenticateFailure(),
     );

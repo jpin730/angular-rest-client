@@ -71,7 +71,7 @@ export class LoginPageComponent implements AfterViewInit {
     this.login();
   }
 
-  private loginWithGoogle(token: string) {
-    // TODO: login flow with google
+  private loginWithGoogle(id_token: string) {
+    this.store.dispatch(authActions.loginWithGoogle({ id_token }));
   }
 }

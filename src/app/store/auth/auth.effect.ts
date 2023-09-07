@@ -6,6 +6,9 @@ import { AuthService } from 'src/app/services/auth.service';
 import { authActions } from './auth.action';
 import { Router } from '@angular/router';
 import { PATH } from 'src/app/utils/constants';
+import { GoogleClientLibrary } from 'src/app/interfaces/google-client-library';
+
+declare let google: GoogleClientLibrary;
 
 export const authenticate = createEffect(
   (actions$ = inject(Actions), authService = inject(AuthService)) =>
@@ -48,11 +51,36 @@ export const login = createEffect(
   { functional: true },
 );
 
+export const loginWithGoogle = createEffect(
+  (actions$ = inject(Actions), authService = inject(AuthService), router = inject(Router)) =>
+    actions$.pipe(
+      ofType(authActions.loginWithGoogle),
+      exhaustMap(({ id_token }) =>
+        authService.loginWithGoogle(id_token).pipe(
+          tap(({ token, refresh }) => {
+            localStorage.setItem('token', token);
+            localStorage.setItem('refresh', refresh);
+            router.navigate([PATH.home]);
+          }),
+          map(({ user }) => authActions.loginSuccess({ user })),
+          catchError(() => of(authActions.loginFailure())),
+        ),
+      ),
+    ),
+  { functional: true },
+);
+
 export const logout = createEffect(
   (actions$ = inject(Actions), router = inject(Router)) =>
     actions$.pipe(
       ofType(authActions.logout),
-      tap(() => {
+      tap(async ({ user }) => {
+        if (user.google) {
+          google.accounts.id.disableAutoSelect();
+          await new Promise<void>((resolve) =>
+            google.accounts.id.revoke(user.email, () => resolve()),
+          );
+        }
         localStorage.removeItem('token');
         localStorage.removeItem('refresh');
         router.navigate([PATH.login]);
