@@ -1,4 +1,5 @@
 import { ApiParsedErrorMessage } from 'src/app/interfaces/api-parsed-error-message';
+import { SidenavListItem } from '../interfaces/side-nav-list-item';
 
 export enum BREAKPOINT {
   'sm' = '640px',
@@ -20,3 +21,11 @@ export enum PATH {
   profile = 'profile',
   users = 'users',
 }
+
+export const sidenavList: SidenavListItem[] = [
+  { title: 'Dashboard', link: PATH.home, icon: 'dashboard' },
+  { title: 'Profile', link: PATH.profile, icon: 'account_circle' },
+  { title: 'Users', link: PATH.users, icon: 'group' },
+  { title: 'Categories', link: PATH.categories, icon: 'category' },
+  { title: 'Products', link: PATH.products, icon: 'view_list' },
+];

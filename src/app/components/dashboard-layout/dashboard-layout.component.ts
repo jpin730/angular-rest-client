@@ -9,7 +9,7 @@ import { NgFor } from '@angular/common';
 
 import { SidenavListItem } from 'src/app/interfaces/side-nav-list-item';
 import { media$ } from 'src/app/utils/media';
-import { BREAKPOINT, PATH } from 'src/app/utils/constants';
+import { BREAKPOINT, sidenavList } from 'src/app/utils/constants';
 import { Subject, take, takeUntil } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { authActions } from 'src/app/store/auth/auth.action';
@@ -38,13 +38,8 @@ export class DashboardLayoutComponent implements OnInit {
   user!: User;
   pageTitle = 'Dashboard';
   isMobile = false;
-  sidenavList: SidenavListItem[] = [
-    { title: 'Dashboard', link: PATH.home, icon: 'dashboard' },
-    { title: 'Profile', link: PATH.profile, icon: 'account_circle' },
-    { title: 'Users', link: PATH.users, icon: 'group' },
-    { title: 'Categories', link: PATH.categories, icon: 'category' },
-    { title: 'Products', link: PATH.products, icon: 'view_list' },
-  ];
+  sidenavList = sidenavList;
+
   private store = inject(Store);
   private destroyRef = inject(DestroyRef);
   private destroyed = new Subject<void>();
@@ -62,10 +57,10 @@ export class DashboardLayoutComponent implements OnInit {
       this.destroyed.complete();
     });
 
-    media$('max-width', BREAKPOINT.md)
+    media$('min-width', BREAKPOINT.md)
       .pipe(takeUntil(this.destroyed))
       .subscribe((matches) => {
-        this.isMobile = matches;
+        this.isMobile = !matches;
       });
   }
 

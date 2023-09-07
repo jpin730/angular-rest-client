@@ -52,8 +52,11 @@ export class LoginPageComponent implements AfterViewInit {
       },
     });
 
-    const width = media('max-width', BREAKPOINT.sm) ? 238 : 302;
-    google.accounts.id.renderButton(this.googleButtonContainer.nativeElement, { width });
+    const width = media('min-width', BREAKPOINT.sm) ? 302 : 238;
+    google.accounts.id.renderButton(this.googleButtonContainer.nativeElement, {
+      width,
+      locale: 'en',
+    });
   }
 
   login() {
