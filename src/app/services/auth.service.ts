@@ -1,7 +1,7 @@
 import { HttpClient, HttpContext } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 
-import { environment } from 'src/environments/environment.development';
+import { environment } from 'src/environments/environment';
 import { REFRESH_TOKEN } from '../interceptors/token.interceptor';
 import { GetAuthCheck, PostAuthLogin } from '../interfaces/api-auth-responses';
 

@@ -8,7 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { NgFor } from '@angular/common';
 
 import { SidenavListItem } from 'src/app/interfaces/side-nav-list-item';
-import { media } from 'src/app/utils/media';
+import { media$ } from 'src/app/utils/media';
 import { BREAKPOINT, PATH } from 'src/app/utils/constants';
 import { Subject, takeUntil } from 'rxjs';
 import { Store } from '@ngrx/store';
@@ -52,7 +52,7 @@ export class DashboardLayoutComponent implements OnInit {
       this.destroyed.complete();
     });
 
-    media('max-width', BREAKPOINT.md)
+    media$('max-width', BREAKPOINT.md)
       .pipe(takeUntil(this.destroyed))
       .subscribe((matches) => {
         this.isMobile = matches;
