@@ -55,8 +55,17 @@
     "typescript": "~5.1.3"
   },
   "lint-staged": {
-    "src/**/*": "prettier --write",
-    "src/**/*.html": "eslint",
-    "src/**/*.ts": "eslint"
+    "src/**/*.html": [
+      "prettier --write",
+      "eslint"
+    ],
+    "src/**/*.ts": [
+      "prettier --write",
+      "eslint"
+    ],
+    "src/**/*.css": [
+      "prettier --write",
+      "eslint"
+    ]
   }
 }

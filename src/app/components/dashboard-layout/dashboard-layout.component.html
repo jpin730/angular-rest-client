@@ -5,6 +5,16 @@
     [opened]="isMobile === false"
     class="bg-sky-800">
     <mat-nav-list class="flex h-full w-60 flex-col p-0">
+      <mat-list-item class="h-16">
+        <div matListItemIcon class="m-2 h-12 w-12 overflow-hidden rounded-full">
+          <img
+            [src]="user.avatar || '/assets/avatar_placeholder.png'"
+            alt="{{ user.username }} avatar" />
+        </div>
+        <div matListItemTitle class="-mt-1 text-white">{{ user.username }}</div>
+        <div matListItemLine class="text-white/50">{{ user.email }}</div>
+      </mat-list-item>
+
       <a
         mat-list-item
         *ngFor="let item of sidenavList"
