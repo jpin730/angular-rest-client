@@ -1,1 +1,29 @@
-<p>profile-page works!</p>
+<div *ngIf="user$ | async as user" class="mx-auto max-w-md rounded border bg-white p-5">
+  <img
+    class="mx-auto mb-5 w-60 rounded-full"
+    [src]="user.avatar || '/assets/avatar_placeholder.png'"
+    alt="{{ user.username }} avatar" />
+  <div class="mb-0 grid grid-cols-1 gap-0 px-3 text-gray-600 sm:grid-cols-2 sm:gap-y-3">
+    <span class="font-medium">Username:</span>
+    <span
+      class="overflow-hidden text-ellipsis text-center font-normal sm:text-left"
+      [title]="user.username">
+      {{ user.username }}
+    </span>
+
+    <span class="font-medium">Email:</span>
+    <span
+      class="overflow-hidden text-ellipsis text-center font-normal sm:text-left"
+      [title]="user.email">
+      {{ user.email }}
+    </span>
+
+    <span class="font-medium">Role:</span>
+    <span class="text-center font-normal sm:text-left">{{ user.role }}</span>
+
+    <span class="font-medium">Google Sign In:</span>
+    <mat-icon [class]="user.google ? 'text-green-700' : 'text-red-700'">{{
+      user.google ? 'check_circle' : 'cancel'
+    }}</mat-icon>
+  </div>
+</div>
