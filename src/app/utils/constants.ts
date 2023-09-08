@@ -22,10 +22,15 @@ export enum PATH {
   users = 'users',
 }
 
-export const sidenavList: SidenavListItem[] = [
+export const SIDE_NAVE_LIST: SidenavListItem[] = [
   { title: 'Dashboard', link: PATH.home, icon: 'dashboard' },
   { title: 'Profile', link: PATH.profile, icon: 'account_circle' },
   { title: 'Users', link: PATH.users, icon: 'group' },
   { title: 'Categories', link: PATH.categories, icon: 'category' },
   { title: 'Products', link: PATH.products, icon: 'view_list' },
 ];
+
+export enum ROLE {
+  admin = 'ADMIN_ROLE',
+  user = 'USER_ROLE',
+}

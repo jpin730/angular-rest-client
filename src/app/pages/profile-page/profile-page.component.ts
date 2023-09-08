@@ -3,6 +3,7 @@ import { Component, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { Store } from '@ngrx/store';
 import { fromAuth } from 'src/app/store/auth';
+import { ROLE } from 'src/app/utils/constants';
 
 @Component({
   selector: 'app-profile-page',
@@ -13,4 +14,5 @@ import { fromAuth } from 'src/app/store/auth';
 export class ProfilePageComponent {
   store = inject(Store);
   user$ = this.store.select(fromAuth.user);
+  role = ROLE;
 }

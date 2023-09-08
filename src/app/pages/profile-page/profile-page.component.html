@@ -18,12 +18,16 @@
       {{ user.email }}
     </span>
 
-    <span class="font-medium">Role:</span>
-    <span class="text-center font-normal sm:text-left">{{ user.role }}</span>
+    <span class="font-medium">Admin Role:</span>
+    <mat-icon
+      class="mx-auto sm:mx-0"
+      [class]="user.role === role.admin ? 'text-green-700' : 'text-red-700'">
+      {{ user.role === role.admin ? 'check_circle' : 'cancel' }}
+    </mat-icon>
 
     <span class="font-medium">Google Sign In:</span>
-    <mat-icon [class]="user.google ? 'text-green-700' : 'text-red-700'">{{
-      user.google ? 'check_circle' : 'cancel'
-    }}</mat-icon>
+    <mat-icon class="mx-auto sm:mx-0" [class]="user.google ? 'text-green-700' : 'text-red-700'">
+      {{ user.google ? 'check_circle' : 'cancel' }}
+    </mat-icon>
   </div>
 </div>

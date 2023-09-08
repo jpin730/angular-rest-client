@@ -9,7 +9,7 @@ import { NgFor } from '@angular/common';
 
 import { SidenavListItem } from 'src/app/interfaces/side-nav-list-item';
 import { media$ } from 'src/app/utils/media';
-import { BREAKPOINT, sidenavList } from 'src/app/utils/constants';
+import { BREAKPOINT, SIDE_NAVE_LIST } from 'src/app/utils/constants';
 import { Subject, take, takeUntil } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { authActions } from 'src/app/store/auth/auth.action';
@@ -38,7 +38,7 @@ export class DashboardLayoutComponent implements OnInit {
   user!: User;
   pageTitle = 'Dashboard';
   isMobile = false;
-  sidenavList = sidenavList;
+  sidenavList = SIDE_NAVE_LIST;
 
   private store = inject(Store);
   private destroyRef = inject(DestroyRef);

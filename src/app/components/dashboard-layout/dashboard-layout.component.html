@@ -3,7 +3,7 @@
     #sidenav
     [mode]="isMobile ? 'over' : 'side'"
     [opened]="isMobile === false"
-    class="bg-sky-800">
+    class="bg-primary">
     <mat-nav-list class="flex h-full w-60 flex-col p-0">
       <mat-list-item class="h-16">
         <div matListItemIcon class="m-2 h-12 w-12 overflow-hidden rounded-full">
@@ -20,7 +20,7 @@
         *ngFor="let item of sidenavList"
         class="h-16"
         [routerLink]="item.link"
-        routerLinkActive="bg-sky-950"
+        routerLinkActive="bg-black/10"
         [routerLinkActiveOptions]="{ exact: true }"
         (isActiveChange)="isActiveChange($event, item)"
         (click)="isMobile && sidenav.close()">
@@ -42,7 +42,7 @@
   </mat-sidenav>
 
   <mat-sidenav-content>
-    <mat-toolbar class="justify-between bg-sky-800 md:border-b md:bg-white">
+    <mat-toolbar class="justify-between bg-primary md:border-b md:bg-white">
       <h1 class="ml-2 text-white md:text-gray-800">{{ pageTitle }}</h1>
       <button mat-icon-button class="block md:hidden" (click)="sidenav.toggle()">
         <mat-icon class="text-white">menu</mat-icon>
@@ -50,7 +50,7 @@
     </mat-toolbar>
 
     <div
-      class="mx-auto max-w-sm p-4 sm:max-w-xl md:max-w-lg lg:max-w-3xl xl:max-w-5xl 2xl:max-w-7xl">
+      class="mx-auto max-w-sm p-4 sm:max-w-xl sm:py-8 md:max-w-lg lg:max-w-3xl xl:max-w-5xl 2xl:max-w-7xl">
       <router-outlet />
     </div>
   </mat-sidenav-content>

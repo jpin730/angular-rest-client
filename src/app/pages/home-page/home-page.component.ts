@@ -4,7 +4,7 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 
-import { PATH, sidenavList } from 'src/app/utils/constants';
+import { PATH, SIDE_NAVE_LIST } from 'src/app/utils/constants';
 
 @Component({
   selector: 'app-home-page',
@@ -13,5 +13,5 @@ import { PATH, sidenavList } from 'src/app/utils/constants';
   templateUrl: './home-page.component.html',
 })
 export class HomePageComponent {
-  sidenavList = sidenavList.filter(({ link }) => link !== PATH.home);
+  sidenavList = SIDE_NAVE_LIST.filter(({ link }) => link !== PATH.home);
 }
