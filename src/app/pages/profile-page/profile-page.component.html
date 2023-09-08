@@ -1,8 +1,40 @@
 <div *ngIf="user$ | async as user" class="mx-auto max-w-md rounded border bg-white p-5">
   <img
-    class="mx-auto mb-5 w-60 rounded-full"
-    [src]="user.avatar || '/assets/avatar_placeholder.png'"
+    class="mx-auto mb-5 h-60 w-60 rounded-full border object-cover hover:cursor-pointer"
+    [src]="avatarPreview || user.avatar || '/assets/avatar_placeholder.png'"
     alt="{{ user.username }} avatar" />
+
+  <div class="mx-auto mb-5 flex justify-center gap-3">
+    <input
+      type="file"
+      class="hidden"
+      accept="image/png, image/jpeg"
+      (change)="showFilePreview($event)"
+      #fileInput />
+
+    <ng-container *ngIf="!file; else confirm">
+      <button mat-stroked-button color="primary" (click)="fileInput.click()">Change avatar</button>
+    </ng-container>
+
+    <ng-template #confirm>
+      <button
+        mat-stroked-button
+        color="primary"
+        class="w-24"
+        (click)="avatarPreview = ''; file = undefined; fileInput.value = ''">
+        Cancel
+      </button>
+      <button mat-flat-button color="primary" class="w-24" (click)="submitFile()">Save</button>
+    </ng-template>
+  </div>
+
+  <!-- <div>
+    <mat-progress-bar mode="determinate" [value]="uploadProgress" *ngIf="uploadProgress">
+    </mat-progress-bar>
+
+    <mat-icon (click)="cancelUpload()" *ngIf="uploadProgress">delete_forever</mat-icon>
+  </div> -->
+
   <div class="mb-0 grid grid-cols-1 gap-0 px-3 text-gray-600 sm:grid-cols-2 sm:gap-y-3">
     <span class="font-medium">Username:</span>
     <span
