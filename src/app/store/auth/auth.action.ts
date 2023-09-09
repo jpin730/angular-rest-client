@@ -12,6 +12,7 @@ export const authActions = createActionGroup({
     'Login with Google': props<{ id_token: string }>(),
     'Login Success': props<{ user: User }>(),
     'Login Failure': emptyProps(),
+    'Set User': props<{ user: User }>(),
     Logout: props<{ user: User }>(),
   },
 });

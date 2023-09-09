@@ -4,36 +4,37 @@
     [src]="avatarPreview || user.avatar || '/assets/avatar_placeholder.png'"
     alt="{{ user.username }} avatar" />
 
-  <div class="mx-auto mb-5 flex justify-center gap-3">
-    <input
-      type="file"
-      class="hidden"
-      accept="image/png, image/jpeg"
-      (change)="showFilePreview($event)"
-      #fileInput />
+  <input
+    type="file"
+    class="hidden"
+    accept="image/png, image/jpeg"
+    (change)="showFilePreview($event)"
+    #fileInput />
 
-    <ng-container *ngIf="!file; else confirm">
-      <button mat-stroked-button color="primary" (click)="fileInput.click()">Change avatar</button>
+  <div class="mx-auto mb-5 flex flex-wrap justify-center gap-3">
+    <ng-container *ngIf="!file; else confirmUpload">
+      <button mat-stroked-button (click)="fileInput.click()">Change avatar</button>
     </ng-container>
 
-    <ng-template #confirm>
-      <button
-        mat-stroked-button
-        color="primary"
-        class="w-24"
-        (click)="avatarPreview = ''; file = undefined; fileInput.value = ''">
-        Cancel
-      </button>
-      <button mat-flat-button color="primary" class="w-24" (click)="submitFile()">Save</button>
+    <ng-template #confirmUpload>
+      <ng-container *ngIf="(progress$ | async) === 0; else cancelUpload">
+        <button mat-stroked-button class="w-24" (click)="clearPreview()">Cancel</button>
+
+        <button mat-flat-button color="primary" class="w-24" (click)="submitFile()">Save</button>
+      </ng-container>
     </ng-template>
+
+    <ng-template #cancelUpload>
+      <button mat-stroked-button class="" (click)="cancelFileUpload()">Cancel upload</button>
+    </ng-template>
+
+    <div class="w-full" [class.invisible]="(progress$ | async) === 0">
+      <mat-progress-bar mode="determinate" color="accent" [value]="progress$ | async">
+      </mat-progress-bar>
+    </div>
   </div>
 
-  <!-- <div>
-    <mat-progress-bar mode="determinate" [value]="uploadProgress" *ngIf="uploadProgress">
-    </mat-progress-bar>
-
-    <mat-icon (click)="cancelUpload()" *ngIf="uploadProgress">delete_forever</mat-icon>
-  </div> -->
+  <div *ngIf=""></div>
 
   <div class="mb-0 grid grid-cols-1 gap-0 px-3 text-gray-600 sm:grid-cols-2 sm:gap-y-3">
     <span class="font-medium">Username:</span>
@@ -51,15 +52,9 @@
     </span>
 
     <span class="font-medium">Admin Role:</span>
-    <mat-icon
-      class="mx-auto sm:mx-0"
-      [class]="user.role === role.admin ? 'text-green-700' : 'text-red-700'">
-      {{ user.role === role.admin ? 'check_circle' : 'cancel' }}
-    </mat-icon>
+    <mat-icon class="mx-auto sm:mx-0" [appBoolIcon]="user.role === role.admin" />
 
     <span class="font-medium">Google Sign In:</span>
-    <mat-icon class="mx-auto sm:mx-0" [class]="user.google ? 'text-green-700' : 'text-red-700'">
-      {{ user.google ? 'check_circle' : 'cancel' }}
-    </mat-icon>
+    <mat-icon class="mx-auto sm:mx-0" [appBoolIcon]="user.google" />
   </div>
 </div>

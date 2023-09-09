@@ -86,6 +86,5 @@ export const logout = createEffect(
         router.navigate([PATH.login]);
       }),
     ),
-
   { functional: true, dispatch: false },
 );
