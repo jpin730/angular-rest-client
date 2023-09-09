@@ -64,8 +64,7 @@
       "eslint"
     ],
     "src/**/*.css": [
-      "prettier --write",
-      "eslint"
+      "prettier --write"
     ]
   }
 }

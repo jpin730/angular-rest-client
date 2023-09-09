@@ -1,18 +1,5 @@
 {
   "root": true,
-  "extends": ["plugin:tailwindcss/recommended"],
-  "rules": {
-    "tailwindcss/no-custom-classname": [
-      "warn",
-      { "cssFiles": ["node_modules/@angular/material/prebuilt-themes/indigo-pink.css"] }
-    ],
-    "tailwindcss/classnames-order": [
-      "warn",
-      {
-        "config": "./tailwindcss.config.js"
-      }
-    ]
-  },
   "overrides": [
     {
       "files": ["*.ts"],
@@ -47,8 +34,15 @@
       "files": ["*.html"],
       "extends": [
         "plugin:@angular-eslint/template/recommended",
-        "plugin:@angular-eslint/template/accessibility"
-      ]
+        "plugin:@angular-eslint/template/accessibility",
+        "plugin:tailwindcss/recommended"
+      ],
+      "rules": {
+        "tailwindcss/no-custom-classname": [
+          "warn",
+          { "cssFiles": ["node_modules/@angular/material/prebuilt-themes/indigo-pink.css"] }
+        ]
+      }
     }
   ]
 }
