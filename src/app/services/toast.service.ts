@@ -13,6 +13,12 @@ export class ToastService {
     tapToDismiss: false,
   };
 
+  success(message: string): ActiveToast<Toast> {
+    return this.toastr.success(message, 'Success', {
+      ...this.baseConfig,
+    });
+  }
+
   error(message: string): ActiveToast<Toast> {
     return this.toastr.error(message, 'Error', {
       ...this.baseConfig,
