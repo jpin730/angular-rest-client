@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { PATH } from '../utils/constants';
+import { isAdmin } from '../guards/auth.guard';
 
 export default [
   {
@@ -15,6 +16,7 @@ export default [
   },
   {
     path: PATH.users,
+    canActivate: [isAdmin],
     loadComponent: () =>
       import('../pages/users-page/users-page.component').then((m) => m.UsersPageComponent),
   },

@@ -19,7 +19,7 @@
 
         <a
           mat-list-item
-          *ngFor="let item of sidenavList"
+          *ngFor="let item of sidenavList$ | async"
           class="h-16"
           [routerLink]="item.link"
           routerLinkActive="bg-black/10"

@@ -10,7 +10,7 @@ import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { SidenavListItem } from 'src/app/interfaces/side-nav-list-item';
 import { media$ } from 'src/app/utils/media';
 import { BREAKPOINT, SIDE_NAVE_LIST } from 'src/app/utils/constants';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, map, takeUntil } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { authActions } from 'src/app/store/auth/auth.action';
 import { fromAuth } from 'src/app/store/auth';
@@ -44,7 +44,11 @@ export class DashboardLayoutComponent implements OnInit {
   user$ = this.store.select(fromAuth.user);
   pageTitle = 'Dashboard';
   isMobile = false;
-  sidenavList = SIDE_NAVE_LIST;
+  sidenavList$ = this.store
+    .select(fromAuth.isAdmin)
+    .pipe(
+      map((isAdmin) => (isAdmin ? SIDE_NAVE_LIST : SIDE_NAVE_LIST.filter(({ admin }) => !admin))),
+    );
 
   ngOnInit(): void {
     this.destroyRef.onDestroy(() => {

@@ -25,7 +25,7 @@ export enum PATH {
 export const SIDE_NAVE_LIST: SidenavListItem[] = [
   { title: 'Dashboard', link: PATH.home, icon: 'dashboard' },
   { title: 'Profile', link: PATH.profile, icon: 'account_circle' },
-  { title: 'Users', link: PATH.users, icon: 'group' },
+  { title: 'Users', link: PATH.users, icon: 'group', admin: true },
   { title: 'Categories', link: PATH.categories, icon: 'category' },
   { title: 'Products', link: PATH.products, icon: 'view_list' },
 ];
