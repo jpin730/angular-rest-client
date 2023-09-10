@@ -1,8 +1,6 @@
 {
-  "root": true,
   "overrides": [
     {
-      "files": ["*.ts"],
       "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
@@ -10,39 +8,49 @@
         "plugin:@angular-eslint/template/process-inline-templates",
         "prettier"
       ],
+      "files": [
+        "*.ts"
+      ],
       "rules": {
-        "@angular-eslint/directive-selector": [
-          "error",
-          {
-            "type": "attribute",
-            "prefix": "app",
-            "style": "camelCase"
-          }
-        ],
         "@angular-eslint/component-selector": [
           "error",
           {
-            "type": "element",
             "prefix": "app",
-            "style": "kebab-case"
+            "style": "kebab-case",
+            "type": "element"
+          }
+        ],
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "prefix": "app",
+            "style": "camelCase",
+            "type": "attribute"
           }
         ],
         "no-console": "error"
       }
     },
     {
-      "files": ["*.html"],
       "extends": [
         "plugin:@angular-eslint/template/recommended",
         "plugin:@angular-eslint/template/accessibility",
         "plugin:tailwindcss/recommended"
       ],
+      "files": [
+        "*.html"
+      ],
       "rules": {
         "tailwindcss/no-custom-classname": [
           "warn",
-          { "cssFiles": ["node_modules/@angular/material/prebuilt-themes/indigo-pink.css"] }
+          {
+            "cssFiles": [
+              "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+            ]
+          }
         ]
       }
     }
-  ]
+  ],
+  "root": true
 }

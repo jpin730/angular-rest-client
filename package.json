@@ -1,16 +1,4 @@
 {
-  "name": "angular-rest-client",
-  "version": "0.0.0",
-  "scripts": {
-    "ng": "ng",
-    "dev": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "lint": "eslint src",
-    "format": "prettier --write src",
-    "postinstall": "husky install"
-  },
-  "private": true,
   "dependencies": {
     "@angular/animations": "^16.2.0",
     "@angular/cdk": "16.2.2",
@@ -55,6 +43,9 @@
     "typescript": "~5.1.3"
   },
   "lint-staged": {
+    "src/**/*.css": [
+      "prettier --write"
+    ],
     "src/**/*.html": [
       "prettier --write",
       "eslint"
@@ -62,9 +53,18 @@
     "src/**/*.ts": [
       "prettier --write",
       "eslint"
-    ],
-    "src/**/*.css": [
-      "prettier --write"
     ]
-  }
+  },
+  "name": "angular-rest-client",
+  "private": true,
+  "scripts": {
+    "build": "ng build",
+    "dev": "ng serve",
+    "format": "prettier --write src",
+    "lint": "eslint src",
+    "ng": "ng",
+    "postinstall": "husky install",
+    "watch": "ng build --watch --configuration development"
+  },
+  "version": "0.0.0"
 }
