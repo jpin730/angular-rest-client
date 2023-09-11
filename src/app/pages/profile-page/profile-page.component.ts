@@ -33,7 +33,7 @@ export class ProfilePageComponent {
   store = inject(Store);
 
   file: File | null = null;
-  role = ROLE;
+  adminRole = ROLE.admin;
   fileInputValue = '';
   avatarPreview = '';
   user$ = this.store.select(fromAuth.user).pipe(tap(() => this.clearPreview()));

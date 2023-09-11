@@ -15,9 +15,9 @@
 }
 
 .toast-error .toast-title {
-  @apply bg-red-700 px-3 py-1 text-white;
+  @apply bg-warn px-3 py-1 text-white;
 }
 
 .toast-success .toast-title {
-  @apply bg-green-700 px-3 py-1 text-white;
+  @apply bg-primary px-3 py-1 text-white;
 }

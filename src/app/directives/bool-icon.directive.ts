@@ -8,8 +8,8 @@ import { MatIcon } from '@angular/material/icon';
 export class BoolIconDirective {
   _value = false;
   matIcon: MatIcon = inject(MatIcon);
-  @HostBinding('class.text-red-700') isRed = true;
-  @HostBinding('class.text-green-700') isGreen = false;
+  @HostBinding('class.text-warn') isRed = true;
+  @HostBinding('class.text-primary') isGreen = false;
   @Input() set appBoolIcon(value: boolean) {
     this.isGreen = value;
     this.isRed = !value;

@@ -7,9 +7,9 @@
       class="bg-primary">
       <mat-nav-list class="flex h-full w-60 flex-col p-0">
         <mat-list-item class="h-16">
-          <div matListItemIcon class="m-2 h-12 w-12 overflow-hidden rounded-full">
+          <div matListItemIcon class="m-2 h-12 w-12">
             <img
-              class="h-full w-full rounded bg-white object-cover"
+              class="h-full w-full rounded-full bg-white object-cover"
               [src]="user.avatar || '/assets/avatar_placeholder.png'"
               alt="{{ user.username }} avatar" />
           </div>
@@ -51,8 +51,7 @@
         </button>
       </mat-toolbar>
 
-      <div
-        class="mx-auto max-w-sm p-4 sm:max-w-xl sm:py-8 md:max-w-lg lg:max-w-3xl xl:max-w-5xl 2xl:max-w-7xl">
+      <div class="mx-auto p-4 sm:py-8">
         <router-outlet />
       </div>
     </mat-sidenav-content>
