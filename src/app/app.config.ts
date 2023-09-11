@@ -15,6 +15,7 @@ import { tokenInterceptor } from './interceptors/token.interceptor';
 import { errorHandlerInterceptor } from './interceptors/error-handler.interceptor';
 import { appEffects } from './store/app';
 import { uploadEffect } from './store/upload';
+import { usersEffects } from './store/users';
 
 const interceptors = [tokenInterceptor, errorHandlerInterceptor];
 
@@ -26,7 +27,7 @@ export const appConfig: ApplicationConfig = {
     provideStore(reducers),
     provideRouterStore({ stateKey: 'router' }),
     provideStoreDevtools(),
-    provideEffects(appEffects, authEffects, uploadEffect),
+    provideEffects(appEffects, authEffects, uploadEffect, usersEffects),
     provideToastr(),
   ],
 };

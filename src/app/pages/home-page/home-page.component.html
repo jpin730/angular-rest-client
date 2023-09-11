@@ -3,8 +3,9 @@
     *ngFor="let item of sidenavList"
     matRipple
     [routerLink]="item.link"
-    class="flex h-36 flex-col items-center justify-center gap-4 rounded border bg-white text-gray-700 sm:h-60">
-    <mat-icon>{{ item.icon }}</mat-icon>
-    <span class="mat-h2">{{ item.title }}</span>
+    class="flex h-36 flex-col items-center justify-center rounded border bg-white text-gray-700 sm:h-60">
+    <mat-icon class="mb-4">{{ item.icon }}</mat-icon>
+    <span class="mat-h2 mb-0">{{ item.title }}</span>
+    <span *ngIf="item.admin" class="text-xs text-gray-500">Admin Role is required</span>
   </a>
 </div>

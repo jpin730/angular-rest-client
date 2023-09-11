@@ -34,3 +34,6 @@ export enum ROLE {
   admin = 'ADMIN_ROLE',
   user = 'USER_ROLE',
 }
+
+export const API_DEFAULT_LIMIT = 5;
+export const API_DEFAULT_OFFSET = 0;
