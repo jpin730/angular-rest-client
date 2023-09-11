@@ -11,6 +11,3 @@ export const media$ = (mode: MediaMode, breakpoint: BREAKPOINT): Observable<bool
     map(({ matches }) => matches),
   );
 };
-
-export const media = (mode: MediaMode, breakpoint: BREAKPOINT): boolean =>
-  window.matchMedia(`(${mode}: ${breakpoint})`).matches;

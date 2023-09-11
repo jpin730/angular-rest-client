@@ -1,15 +1,25 @@
-import { AfterViewInit, Component, ElementRef, NgZone, ViewChild, inject } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  DestroyRef,
+  ElementRef,
+  NgZone,
+  OnInit,
+  ViewChild,
+  inject,
+} from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Store } from '@ngrx/store';
+import { Subject, takeUntil } from 'rxjs';
 
 import { FormFieldErrorsModule } from 'src/app/directives/form-field-errors/form-field-errors.module';
 import { GoogleClientLibrary } from 'src/app/interfaces/google-client-library';
 import { authActions } from 'src/app/store/auth/auth.action';
 import { BREAKPOINT } from 'src/app/utils/constants';
-import { media } from 'src/app/utils/media';
+import { media$ } from 'src/app/utils/media';
 import { environment } from 'src/environments/environment';
 
 declare let google: GoogleClientLibrary;
@@ -28,10 +38,12 @@ const imports = [
   imports,
   templateUrl: './login-page.component.html',
 })
-export class LoginPageComponent implements AfterViewInit {
+export class LoginPageComponent implements OnInit, AfterViewInit {
   private fb = inject(FormBuilder).nonNullable;
   private store = inject(Store);
   private ngZone = inject(NgZone);
+  private destroyRef = inject(DestroyRef);
+  private destroyed = new Subject<void>();
 
   @ViewChild('googleButtonContainer') googleButtonContainer!: ElementRef<HTMLDivElement>;
 
@@ -39,6 +51,13 @@ export class LoginPageComponent implements AfterViewInit {
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
   });
+
+  ngOnInit(): void {
+    this.destroyRef.onDestroy(() => {
+      this.destroyed.next();
+      this.destroyed.complete();
+    });
+  }
 
   ngAfterViewInit(): void {
     google.accounts.id.initialize({
@@ -52,11 +71,15 @@ export class LoginPageComponent implements AfterViewInit {
       },
     });
 
-    const width = media('min-width', BREAKPOINT.sm) ? 302 : 238;
-    google.accounts.id.renderButton(this.googleButtonContainer.nativeElement, {
-      width,
-      locale: 'en',
-    });
+    media$('min-width', BREAKPOINT.sm)
+      .pipe(takeUntil(this.destroyed))
+      .subscribe((matches) => {
+        const width = matches ? 302 : 238;
+        google.accounts.id.renderButton(this.googleButtonContainer.nativeElement, {
+          width,
+          locale: 'en',
+        });
+      });
   }
 
   login() {
