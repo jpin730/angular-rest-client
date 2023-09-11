@@ -6,7 +6,7 @@
       [opened]="isMobile === false"
       class="bg-primary">
       <mat-nav-list class="flex h-full w-60 flex-col p-0">
-        <mat-list-item class="h-16">
+        <a mat-list-item class="h-16" [routerLink]="profilePath">
           <div matListItemIcon class="m-2 h-12 w-12">
             <img
               class="h-full w-full rounded-full bg-white object-cover"
@@ -15,7 +15,7 @@
           </div>
           <div matListItemTitle class="-mt-1 text-white">{{ user.username }}</div>
           <div matListItemLine class="text-white/50">{{ user.email }}</div>
-        </mat-list-item>
+        </a>
 
         <a
           mat-list-item

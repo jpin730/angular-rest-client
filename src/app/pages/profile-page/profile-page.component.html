@@ -1,60 +1,50 @@
-<div *ngIf="user$ | async as user" class="mx-auto max-w-md rounded border bg-white p-5">
-  <img
-    class="mx-auto mb-5 h-60 w-60 rounded-full border object-cover hover:cursor-pointer"
-    [src]="avatarPreview || user.avatar || '/assets/avatar_placeholder.png'"
-    alt="{{ user.username }} avatar" />
-
-  <input
-    type="file"
-    class="hidden"
-    accept="image/png, image/jpeg"
-    (change)="showFilePreview($event)"
-    #fileInput />
-
-  <div class="mx-auto mb-5 flex flex-wrap justify-center gap-3">
-    <ng-container *ngIf="!file; else confirmUpload">
-      <button mat-stroked-button (click)="fileInput.click()">Change avatar</button>
-    </ng-container>
-
-    <ng-template #confirmUpload>
-      <ng-container *ngIf="(progress$ | async) === 0; else cancelUpload">
-        <button mat-stroked-button class="w-24" (click)="clearPreview()">Cancel</button>
-
-        <button mat-flat-button color="primary" class="w-24" (click)="submitFile()">Save</button>
+<div *ngIf="user$ | async as user" class="flex justify-center rounded border bg-white p-5">
+  <div>
+    <img
+      class="mx-auto mb-5 h-60 w-60 rounded-full border object-cover hover:cursor-pointer"
+      [src]="avatarPreview || user.avatar || '/assets/avatar_placeholder.png'"
+      alt="{{ user.username }} avatar" />
+    <input
+      type="file"
+      class="hidden"
+      accept="image/png, image/jpeg"
+      (change)="showFilePreview($event)"
+      #fileInput />
+    <div class="mx-auto mb-5 flex flex-wrap justify-center gap-3">
+      <ng-container *ngIf="!file; else confirmUpload">
+        <button mat-stroked-button (click)="fileInput.click()">Change avatar</button>
       </ng-container>
-    </ng-template>
-
-    <ng-template #cancelUpload>
-      <button mat-stroked-button class="" (click)="cancelFileUpload()">Cancel upload</button>
-    </ng-template>
-
-    <div class="w-full" [class.invisible]="(progress$ | async) === 0">
-      <mat-progress-bar mode="determinate" color="accent" [value]="progress$ | async">
-      </mat-progress-bar>
+      <ng-template #confirmUpload>
+        <ng-container *ngIf="(progress$ | async) === 0; else cancelUpload">
+          <button mat-stroked-button class="w-24" (click)="clearPreview()">Cancel</button>
+          <button mat-flat-button color="primary" class="w-24" (click)="submitFile()">Save</button>
+        </ng-container>
+      </ng-template>
+      <ng-template #cancelUpload>
+        <button mat-stroked-button class="" (click)="cancelFileUpload()">Cancel upload</button>
+      </ng-template>
+      <div class="w-full" [class.invisible]="(progress$ | async) === 0">
+        <mat-progress-bar mode="determinate" color="accent" [value]="progress$ | async">
+        </mat-progress-bar>
+      </div>
     </div>
-  </div>
-
-  <div *ngIf=""></div>
-
-  <div class="mb-0 grid grid-cols-1 gap-0 px-3 text-dark sm:grid-cols-2 sm:gap-y-3">
-    <span class="font-medium">Username:</span>
-    <span
-      class="overflow-hidden text-ellipsis text-center font-normal sm:text-left"
-      [title]="user.username">
-      {{ user.username }}
-    </span>
-
-    <span class="font-medium">Email:</span>
-    <span
-      class="overflow-hidden text-ellipsis text-center font-normal sm:text-left"
-      [title]="user.email">
-      {{ user.email }}
-    </span>
-
-    <span class="font-medium">Admin Role:</span>
-    <mat-icon class="mx-auto sm:mx-0" [appBoolIcon]="user.role === adminRole" />
-
-    <span class="font-medium">Google Sign In:</span>
-    <mat-icon class="mx-auto sm:mx-0" [appBoolIcon]="user.google" />
+    <div class="mb-0 grid grid-cols-1 gap-0 px-3 text-dark sm:grid-cols-2 sm:gap-y-3">
+      <span class="font-medium">Username:</span>
+      <span
+        class="overflow-hidden text-ellipsis text-center font-normal sm:text-left"
+        [title]="user.username">
+        {{ user.username }}
+      </span>
+      <span class="font-medium">Email:</span>
+      <span
+        class="overflow-hidden text-ellipsis text-center font-normal sm:text-left"
+        [title]="user.email">
+        {{ user.email }}
+      </span>
+      <span class="font-medium">Admin Role:</span>
+      <mat-icon class="mx-auto sm:mx-0" [appBoolIcon]="user.role === adminRole" />
+      <span class="font-medium">Google Sign In:</span>
+      <mat-icon class="mx-auto sm:mx-0" [appBoolIcon]="user.google" />
+    </div>
   </div>
 </div>

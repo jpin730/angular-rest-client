@@ -55,7 +55,7 @@ export class UsersPageComponent implements OnInit {
   adminRole = ROLE.admin;
   searchControl = new FormControl('', { nonNullable: true });
   searchFocus = false;
-  pageSizeOptions = [1, ...PAGINATOR_SIZE_OPTIONS];
+  pageSizeOptions = PAGINATOR_SIZE_OPTIONS;
 
   ngOnInit(): void {
     this.searchControl.valueChanges.pipe(debounceTime(DEBOUNCE_TIME)).subscribe(() => {
