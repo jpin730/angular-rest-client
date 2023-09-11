@@ -29,3 +29,17 @@ export const getUsers = createEffect(
     ),
   { functional: true },
 );
+
+export const searchUsers = createEffect(
+  (actions$ = inject(Actions), usersService = inject(UsersService)) =>
+    actions$.pipe(
+      ofType(userActions.searchUsers),
+      exhaustMap(({ query, limit, offset }) =>
+        usersService.searchUsers(query, limit, offset).pipe(
+          map((res) => userActions.searchUsersSuccess(res)),
+          catchError(() => of(userActions.searchUsersFailure())),
+        ),
+      ),
+    ),
+  { functional: true },
+);

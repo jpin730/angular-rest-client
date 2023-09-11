@@ -39,3 +39,5 @@ export const API_DEFAULT_LIMIT = 5;
 export const API_DEFAULT_OFFSET = 0;
 
 export const PAGINATOR_SIZE_OPTIONS = [5, 10, 20];
+
+export const DEBOUNCE_TIME = 300;

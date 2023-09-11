@@ -26,4 +26,14 @@ export const usersReducer = createReducer(
     total,
   })),
   on(userActions.getUsersFailure, (state) => ({ ...state, loading: false })),
+  on(userActions.searchUsers, (state) => ({ ...state, loading: true })),
+  on(userActions.searchUsersSuccess, (state, { users, limit, offset, total }) => ({
+    ...state,
+    loading: false,
+    users,
+    limit,
+    offset,
+    total,
+  })),
+  on(userActions.searchUsersFailure, (state) => ({ ...state, loading: false })),
 );

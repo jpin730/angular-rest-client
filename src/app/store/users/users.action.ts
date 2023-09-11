@@ -7,5 +7,8 @@ export const userActions = createActionGroup({
     'Get Users': props<{ limit?: number; offset?: number }>(),
     'Get Users Success': props<GetUsers>(),
     'Get Users Failure': emptyProps(),
+    'Search Users': props<{ query: string; limit?: number; offset?: number }>(),
+    'Search Users Success': props<GetUsers>(),
+    'Search Users Failure': emptyProps(),
   },
 });

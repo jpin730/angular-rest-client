@@ -1,27 +1,31 @@
 <div class="mb-4 flex flex-col justify-between gap-3 sm:flex-row">
-  <button mat-flat-button color="primary">Add user</button>
-
   <div
-    class="h-9 w-full rounded bg-white sm:w-96"
-    [class]="searchFocus ? 'border-primary border-2 p-0' : 'border p-px'">
-    <div class="flex h-full items-center gap-2 px-2">
-      <mat-icon class="text-gray-300">search</mat-icon>
+    class="h-9 grow rounded bg-white"
+    [class]="searchFocus ? 'border-primary border-2 p-0' : 'border p-px'"
+    title="Search by id, email or username">
+    <div class="flex h-full items-center justify-between gap-2 px-2">
+      <mat-icon class="text-gray-200" fontIcon="search" />
       <input
         type="text"
-        [formControl]="search"
-        class="w-full text-sm text-gray-500 outline-none"
+        class="w-full text-sm text-dark outline-none"
         placeholder="Search..."
+        [formControl]="searchControl"
         (focus)="searchFocus = true"
         (blur)="searchFocus = false" />
+      <mat-icon
+        *ngIf="searchControl.value"
+        class="cursor-pointer text-gray-200"
+        (click)="clearSearch()"
+        fontIcon="clear" />
     </div>
   </div>
+
+  <button mat-flat-button color="primary">Add user</button>
 </div>
 
-<div
-  *ngIf="usersState$ | async as usersState"
-  class="overflow-hidden rounded border bg-white pb-2 sm:pb-0">
+<div *ngIf="users$ | async as users" class="overflow-hidden rounded border bg-white pb-2 sm:pb-0">
   <div class="overflow-x-auto">
-    <table mat-table [dataSource]="usersState.users" class="whitespace-nowrap bg-transparent">
+    <table mat-table [dataSource]="users" class="whitespace-nowrap bg-transparent">
       <ng-container matColumnDef="avatar" sticky>
         <th
           mat-header-cell
@@ -81,6 +85,12 @@
               <mat-icon>edit</mat-icon>
               <span>Edit</span>
             </button>
+
+            <button mat-menu-item [cdkCopyToClipboard]="element.uid">
+              <mat-icon>content_copy</mat-icon>
+              <span>Copy id</span>
+            </button>
+
             <button mat-menu-item>
               <mat-icon color="warn">delete</mat-icon>
               <span class="text-warn">Delete</span>
@@ -96,9 +106,9 @@
   <mat-paginator
     showFirstLastButtons
     [pageSizeOptions]="pageSizeOptions"
-    [length]="usersState.total"
-    [pageSize]="usersState.limit"
-    [pageIndex]="usersState.pageIndex"
+    [length]="paginator.length"
+    [pageSize]="paginator.pageSize"
+    [pageIndex]="paginator.pageIndex"
     (page)="onChangePaginator($event)">
   </mat-paginator>
 </div>
