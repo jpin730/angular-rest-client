@@ -62,6 +62,7 @@ export class LoginPageComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     google.accounts.id.initialize({
       client_id: environment.googleClientId,
+      auto_select: false,
       ux_mode: 'popup',
       cancel_on_tap_outside: true,
       callback: ({ credential }) => {

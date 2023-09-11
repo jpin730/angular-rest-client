@@ -74,12 +74,9 @@ export const logout = createEffect(
   (actions$ = inject(Actions), router = inject(Router)) =>
     actions$.pipe(
       ofType(authActions.logout),
-      tap(async ({ user }) => {
+      tap(({ user }) => {
         if (user.google) {
           google.accounts.id.disableAutoSelect();
-          await new Promise<void>((resolve) =>
-            google.accounts.id.revoke(user.email, () => resolve()),
-          );
         }
         localStorage.removeItem('token');
         localStorage.removeItem('refresh');
