@@ -13,7 +13,7 @@ body {
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
-  @apply text-gray-800;
+  @apply text-dark;
 }
 
 .mdc-notched-outline__notch {

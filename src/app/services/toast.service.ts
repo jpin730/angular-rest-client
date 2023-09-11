@@ -7,7 +7,6 @@ import { ActiveToast, IndividualConfig, Toast, ToastrService } from 'ngx-toastr'
 export class ToastService {
   private toastr = inject(ToastrService);
   private baseConfig: Partial<IndividualConfig> = {
-    closeButton: true,
     positionClass: 'toast-bottom-center',
     progressBar: true,
     tapToDismiss: false,

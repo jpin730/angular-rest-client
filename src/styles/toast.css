@@ -1,9 +1,5 @@
 .toast-container .ngx-toastr {
-  @apply bg-white bg-none p-0 text-sm text-gray-800;
-}
-
-.toast-close-button {
-  @apply !right-2 !top-1;
+  @apply bg-white bg-none p-0 text-sm text-dark;
 }
 
 .toast-title {
