@@ -20,7 +20,7 @@
     </div>
   </div>
 
-  <button mat-flat-button color="primary">Add user</button>
+  <button mat-flat-button color="primary" (click)="openUserEditor()">Add user</button>
 </div>
 
 <div *ngIf="users$ | async as users" class="overflow-hidden rounded border bg-white pb-2 sm:pb-0">

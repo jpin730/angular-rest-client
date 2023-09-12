@@ -10,6 +10,7 @@ import {
   MatPaginatorModule,
   PageEvent,
 } from '@angular/material/paginator';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -20,12 +21,15 @@ import { DEBOUNCE_TIME, PAGINATOR_SIZE_OPTIONS, ROLE } from 'src/app/utils/const
 import { PaginatorIntlService } from 'src/app/services/paginator-intl.service';
 import { debounceTime, map } from 'rxjs';
 import { userActions } from 'src/app/store/users/users.action';
+import { UserEditorComponent } from 'src/app/components/user-editor/user-editor.component';
+import { DialogData, DialogResult } from 'src/app/interfaces/user-editor';
 
 const imports = [
   AsyncPipe,
   BoolIconDirective,
   ClipboardModule,
   MatButtonModule,
+  MatDialogModule,
   MatIconModule,
   MatMenuModule,
   MatPaginatorModule,
@@ -43,6 +47,7 @@ const imports = [
 })
 export class UsersPageComponent implements OnInit {
   private store = inject(Store);
+  private dialog = inject(MatDialog);
 
   displayedColumns: string[] = ['avatar', 'email', 'username', 'role', 'google', 'actions'];
   paginator!: Pick<MatPaginator, 'length' | 'pageSize' | 'pageIndex'>;
@@ -62,6 +67,8 @@ export class UsersPageComponent implements OnInit {
       this.paginator.pageIndex = 0;
       this.fetchUsers();
     });
+
+    this.openUserEditor(); // TODO: Remove this
   }
 
   onChangePaginator({ pageSize, pageIndex, length }: PageEvent) {
@@ -82,5 +89,17 @@ export class UsersPageComponent implements OnInit {
         ? userActions.searchUsers({ query, limit, offset })
         : userActions.getUsers({ limit, offset }),
     );
+  }
+
+  openUserEditor(editMode = false) {
+    // TODO: set global configuration
+    const dialogRef = this.dialog.open<UserEditorComponent, DialogData, DialogResult>(
+      UserEditorComponent,
+      { data: { editMode } },
+    );
+
+    dialogRef.afterClosed().subscribe((success) => {
+      // console.log(success); // TODO: refetch users
+    });
   }
 }

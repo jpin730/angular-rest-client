@@ -35,6 +35,11 @@ export enum ROLE {
   user = 'USER_ROLE',
 }
 
+export const ROLE_OPTIONS = Object.entries(ROLE).map(([viewValue, value]) => ({
+  viewValue,
+  value,
+}));
+
 export const API_DEFAULT_LIMIT = 5;
 export const API_DEFAULT_OFFSET = 0;
 
