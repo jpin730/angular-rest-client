@@ -13,13 +13,13 @@ export class ToastService {
   };
 
   success(message: string): ActiveToast<Toast> {
-    return this.toastr.success(message, 'Success', {
+    return this.toastr.success(message, undefined, {
       ...this.baseConfig,
     });
   }
 
   error(message: string): ActiveToast<Toast> {
-    return this.toastr.error(message, 'Error', {
+    return this.toastr.error(message, undefined, {
       ...this.baseConfig,
     });
   }

@@ -1,19 +1,11 @@
 .toast-container .ngx-toastr {
-  @apply bg-white bg-none p-0 text-sm text-dark;
+  @apply bg-none p-3 text-sm text-white;
 }
 
-.toast-title {
-  @apply text-sm;
+.toast-container .ngx-toastr.toast-error {
+  @apply bg-warn;
 }
 
-.toast-message {
-  @apply px-3 py-3 text-sm;
-}
-
-.toast-error .toast-title {
-  @apply bg-warn px-3 py-1 text-white;
-}
-
-.toast-success .toast-title {
-  @apply bg-primary px-3 py-1 text-white;
+.toast-container .ngx-toastr.toast-success {
+  @apply bg-primary;
 }
