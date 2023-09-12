@@ -16,6 +16,8 @@ import { errorHandlerInterceptor } from './interceptors/error-handler.intercepto
 import { appEffects } from './store/app';
 import { uploadEffect } from './store/upload';
 import { usersEffects } from './store/users';
+import { provideDialogConfig } from './providers/dialog-config';
+import { providePaginatorIntl } from './providers/paginator-intl';
 
 const interceptors = [tokenInterceptor, errorHandlerInterceptor];
 
@@ -29,5 +31,7 @@ export const appConfig: ApplicationConfig = {
     provideStoreDevtools(),
     provideEffects(appEffects, authEffects, uploadEffect, usersEffects),
     provideToastr(),
+    providePaginatorIntl(),
+    provideDialogConfig(),
   ],
 };
