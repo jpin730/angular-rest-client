@@ -4,6 +4,7 @@ import { User } from './user';
 
 export interface DialogData {
   editMode: boolean;
+  user?: User;
 }
 
 export type DialogResult = true;

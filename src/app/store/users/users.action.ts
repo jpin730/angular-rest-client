@@ -1,6 +1,6 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import { GetUsers } from 'src/app/interfaces/api-users-responses';
-import { UserFormValue } from 'src/app/interfaces/user-editor';
+import { UserFormValue } from 'src/app/interfaces/user-editor-dialog';
 
 export const usersActions = createActionGroup({
   source: 'Users',

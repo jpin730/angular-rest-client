@@ -10,7 +10,7 @@ import { Store } from '@ngrx/store';
 import { Subject, filter, takeUntil } from 'rxjs';
 
 import { FormFieldErrorsModule } from 'src/app/directives/form-field-errors/form-field-errors.module';
-import { DialogData, DialogResult, UserForm } from 'src/app/interfaces/user-editor';
+import { DialogData, DialogResult, UserForm } from 'src/app/interfaces/user-editor-dialog';
 import { fromUsers } from 'src/app/store/users';
 import { usersActions } from 'src/app/store/users/users.action';
 import { ROLE, ROLE_OPTIONS } from 'src/app/utils/constants';
@@ -31,10 +31,10 @@ const imports = [
   selector: 'app-user-editor',
   standalone: true,
   imports,
-  templateUrl: './user-editor.component.html',
+  templateUrl: './user-editor-dialog.component.html',
 })
-export class UserEditorComponent implements OnInit {
-  private dialogRef: MatDialogRef<UserEditorComponent, DialogResult> = inject(MatDialogRef);
+export class UserEditorDialogComponent implements OnInit {
+  private dialogRef: MatDialogRef<UserEditorDialogComponent, DialogResult> = inject(MatDialogRef);
   private dialogData: DialogData = inject(MAT_DIALOG_DATA);
   private fb = inject(FormBuilder).nonNullable;
   private store = inject(Store);

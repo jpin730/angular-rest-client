@@ -3,7 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { GetUsers } from '../interfaces/api-users-responses';
 import { API_DEFAULT_LIMIT, API_DEFAULT_OFFSET } from '../utils/constants';
-import { UserFormValue } from '../interfaces/user-editor';
+import { UserFormValue } from '../interfaces/user-editor-dialog';
 
 @Injectable({ providedIn: 'root' })
 export class UsersService {

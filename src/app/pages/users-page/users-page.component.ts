@@ -15,8 +15,9 @@ import { fromUsers } from 'src/app/store/users';
 import { DEBOUNCE_TIME, PAGINATOR_SIZE_OPTIONS, ROLE } from 'src/app/utils/constants';
 import { debounceTime, map } from 'rxjs';
 import { usersActions } from 'src/app/store/users/users.action';
-import { UserEditorComponent } from 'src/app/components/user-editor/user-editor.component';
-import { DialogData, DialogResult } from 'src/app/interfaces/user-editor';
+import { UserEditorDialogComponent } from 'src/app/components/user-editor-dialog/user-editor-dialog.component';
+import { DialogData, DialogResult } from 'src/app/interfaces/user-editor-dialog';
+import { User } from 'src/app/interfaces/user';
 
 const imports = [
   AsyncPipe,
@@ -82,10 +83,10 @@ export class UsersPageComponent implements OnInit {
     );
   }
 
-  openUserEditor(editMode = false) {
-    const dialogRef = this.dialog.open<UserEditorComponent, DialogData, DialogResult>(
-      UserEditorComponent,
-      { data: { editMode } },
+  openUserEditor(user?: User) {
+    const dialogRef = this.dialog.open<UserEditorDialogComponent, DialogData, DialogResult>(
+      UserEditorDialogComponent,
+      { data: { editMode: !!user, user } },
     );
 
     dialogRef.afterClosed().subscribe((success) => success && this.fetchUsers());
