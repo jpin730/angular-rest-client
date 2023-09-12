@@ -3,3 +3,4 @@ import { selectUsers } from '..';
 
 export const isLoading = createSelector(selectUsers, (state) => state.loading);
 export const state = createSelector(selectUsers, (state) => state);
+export const success = createSelector(selectUsers, (state) => state.success);

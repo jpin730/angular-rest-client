@@ -1,7 +1,8 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import { GetUsers } from 'src/app/interfaces/api-users-responses';
+import { UserFormValue } from 'src/app/interfaces/user-editor';
 
-export const userActions = createActionGroup({
+export const usersActions = createActionGroup({
   source: 'Users',
   events: {
     'Get Users': props<{ limit?: number; offset?: number }>(),
@@ -10,5 +11,9 @@ export const userActions = createActionGroup({
     'Search Users': props<{ query: string; limit?: number; offset?: number }>(),
     'Search Users Success': props<GetUsers>(),
     'Search Users Failure': emptyProps(),
+    'Create User': props<UserFormValue>(),
+    'Create User Success': emptyProps(),
+    'Create User Failure': emptyProps(),
+    'Reset Success Status': emptyProps(),
   },
 });

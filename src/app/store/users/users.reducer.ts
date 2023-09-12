@@ -1,9 +1,10 @@
 import { createReducer, on } from '@ngrx/store';
 import { GetUsers } from 'src/app/interfaces/api-users-responses';
-import { userActions } from './users.action';
+import { usersActions } from './users.action';
 
 export interface UsersState extends GetUsers {
   loading: boolean;
+  success: boolean;
 }
 
 export const initialUsersState: UsersState = {
@@ -12,12 +13,13 @@ export const initialUsersState: UsersState = {
   offset: 0,
   users: [],
   loading: false,
+  success: false,
 };
 
 export const usersReducer = createReducer(
   initialUsersState,
-  on(userActions.getUsers, (state) => ({ ...state, loading: true })),
-  on(userActions.getUsersSuccess, (state, { users, limit, offset, total }) => ({
+  on(usersActions.getUsers, (state) => ({ ...state, loading: true })),
+  on(usersActions.getUsersSuccess, (state, { users, limit, offset, total }) => ({
     ...state,
     loading: false,
     users,
@@ -25,9 +27,9 @@ export const usersReducer = createReducer(
     offset,
     total,
   })),
-  on(userActions.getUsersFailure, (state) => ({ ...state, loading: false })),
-  on(userActions.searchUsers, (state) => ({ ...state, loading: true })),
-  on(userActions.searchUsersSuccess, (state, { users, limit, offset, total }) => ({
+  on(usersActions.getUsersFailure, (state) => ({ ...state, loading: false })),
+  on(usersActions.searchUsers, (state) => ({ ...state, loading: true })),
+  on(usersActions.searchUsersSuccess, (state, { users, limit, offset, total }) => ({
     ...state,
     loading: false,
     users,
@@ -35,5 +37,9 @@ export const usersReducer = createReducer(
     offset,
     total,
   })),
-  on(userActions.searchUsersFailure, (state) => ({ ...state, loading: false })),
+  on(usersActions.searchUsersFailure, (state) => ({ ...state, loading: false })),
+  on(usersActions.createUser, (state) => ({ ...state, loading: true })),
+  on(usersActions.createUserSuccess, (state) => ({ ...state, loading: false, success: true })),
+  on(usersActions.createUserFailure, (state) => ({ ...state, loading: false })),
+  on(usersActions.resetSuccessStatus, (state) => ({ ...state, success: false })),
 );

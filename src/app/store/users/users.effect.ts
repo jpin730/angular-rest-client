@@ -1,29 +1,17 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, exhaustMap, filter, map, of } from 'rxjs';
+import { catchError, exhaustMap, map, of } from 'rxjs';
 import { UsersService } from 'src/app/services/users.service';
-import { userActions } from './users.action';
-import { routerNavigatedAction } from '@ngrx/router-store';
-import { PATH } from 'src/app/utils/constants';
-
-export const initUsers = createEffect(
-  (actions$ = inject(Actions)) =>
-    actions$.pipe(
-      ofType(routerNavigatedAction),
-      filter(({ payload }) => payload.routerState.url.includes(PATH.users)),
-      exhaustMap(() => of(userActions.getUsers({}))),
-    ),
-  { functional: true },
-);
+import { usersActions } from './users.action';
 
 export const getUsers = createEffect(
   (actions$ = inject(Actions), usersService = inject(UsersService)) =>
     actions$.pipe(
-      ofType(userActions.getUsers),
+      ofType(usersActions.getUsers),
       exhaustMap(({ limit, offset }) =>
         usersService.getUsers(limit, offset).pipe(
-          map((res) => userActions.getUsersSuccess(res)),
-          catchError(() => of(userActions.getUsersFailure())),
+          map((res) => usersActions.getUsersSuccess(res)),
+          catchError(() => of(usersActions.getUsersFailure())),
         ),
       ),
     ),
@@ -33,11 +21,25 @@ export const getUsers = createEffect(
 export const searchUsers = createEffect(
   (actions$ = inject(Actions), usersService = inject(UsersService)) =>
     actions$.pipe(
-      ofType(userActions.searchUsers),
+      ofType(usersActions.searchUsers),
       exhaustMap(({ query, limit, offset }) =>
         usersService.searchUsers(query, limit, offset).pipe(
-          map((res) => userActions.searchUsersSuccess(res)),
-          catchError(() => of(userActions.searchUsersFailure())),
+          map((res) => usersActions.searchUsersSuccess(res)),
+          catchError(() => of(usersActions.searchUsersFailure())),
+        ),
+      ),
+    ),
+  { functional: true },
+);
+
+export const postUsers = createEffect(
+  (actions$ = inject(Actions), usersService = inject(UsersService)) =>
+    actions$.pipe(
+      ofType(usersActions.createUser),
+      exhaustMap(({ email, username, role, password }) =>
+        usersService.createUser({ email, username, role, password }).pipe(
+          map(() => usersActions.createUserSuccess()),
+          catchError(() => of(usersActions.createUserFailure())),
         ),
       ),
     ),

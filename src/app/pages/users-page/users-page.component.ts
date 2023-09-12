@@ -14,7 +14,7 @@ import { BoolIconDirective } from 'src/app/directives/bool-icon.directive';
 import { fromUsers } from 'src/app/store/users';
 import { DEBOUNCE_TIME, PAGINATOR_SIZE_OPTIONS, ROLE } from 'src/app/utils/constants';
 import { debounceTime, map } from 'rxjs';
-import { userActions } from 'src/app/store/users/users.action';
+import { usersActions } from 'src/app/store/users/users.action';
 import { UserEditorComponent } from 'src/app/components/user-editor/user-editor.component';
 import { DialogData, DialogResult } from 'src/app/interfaces/user-editor';
 
@@ -77,8 +77,8 @@ export class UsersPageComponent implements OnInit {
     const offset = limit * this.paginator.pageIndex;
     this.store.dispatch(
       query
-        ? userActions.searchUsers({ query, limit, offset })
-        : userActions.getUsers({ limit, offset }),
+        ? usersActions.searchUsers({ query, limit, offset })
+        : usersActions.getUsers({ limit, offset }),
     );
   }
 
