@@ -23,4 +23,8 @@ export class UsersService {
   createUser(user: UserFormValue) {
     return this.http.post(`${this.baseURL}`, { ...user });
   }
+
+  editUser({ id, password, ...user }: UserFormValue & { id: string }) {
+    return this.http.put(`${this.baseURL}/${id}`, { ...user, password: password || undefined });
+  }
 }

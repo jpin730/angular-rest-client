@@ -41,5 +41,8 @@ export const usersReducer = createReducer(
   on(usersActions.createUser, (state) => ({ ...state, loading: true })),
   on(usersActions.createUserSuccess, (state) => ({ ...state, loading: false, success: true })),
   on(usersActions.createUserFailure, (state) => ({ ...state, loading: false })),
+  on(usersActions.editUser, (state) => ({ ...state, loading: true })),
+  on(usersActions.editUserSuccess, (state) => ({ ...state, loading: false, success: true })),
+  on(usersActions.editUserFailure, (state) => ({ ...state, loading: false })),
   on(usersActions.resetSuccessStatus, (state) => ({ ...state, success: false })),
 );

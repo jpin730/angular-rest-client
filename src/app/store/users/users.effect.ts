@@ -32,7 +32,7 @@ export const searchUsers = createEffect(
   { functional: true },
 );
 
-export const postUsers = createEffect(
+export const createUsers = createEffect(
   (actions$ = inject(Actions), usersService = inject(UsersService)) =>
     actions$.pipe(
       ofType(usersActions.createUser),
@@ -40,6 +40,20 @@ export const postUsers = createEffect(
         usersService.createUser({ email, username, role, password }).pipe(
           map(() => usersActions.createUserSuccess()),
           catchError(() => of(usersActions.createUserFailure())),
+        ),
+      ),
+    ),
+  { functional: true },
+);
+
+export const editUsers = createEffect(
+  (actions$ = inject(Actions), usersService = inject(UsersService)) =>
+    actions$.pipe(
+      ofType(usersActions.editUser),
+      exhaustMap(({ id, email, username, role, password }) =>
+        usersService.editUser({ id, email, username, role, password }).pipe(
+          map(() => usersActions.editUserSuccess()),
+          catchError(() => of(usersActions.editUserFailure())),
         ),
       ),
     ),

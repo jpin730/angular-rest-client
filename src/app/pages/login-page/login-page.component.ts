@@ -18,7 +18,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { FormFieldErrorsModule } from 'src/app/directives/form-field-errors/form-field-errors.module';
 import { GoogleClientLibrary } from 'src/app/interfaces/google-client-library';
 import { authActions } from 'src/app/store/auth/auth.action';
-import { BREAKPOINT } from 'src/app/utils/constants';
+import { BREAKPOINT, PASSWORD_MIN_LENGTH } from 'src/app/utils/constants';
 import { media$ } from 'src/app/utils/media';
 import { environment } from 'src/environments/environment';
 
@@ -49,7 +49,7 @@ export class LoginPageComponent implements OnInit, AfterViewInit {
 
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(6)]],
+    password: ['', [Validators.required, Validators.minLength(PASSWORD_MIN_LENGTH)]],
   });
 
   ngOnInit(): void {

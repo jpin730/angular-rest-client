@@ -1,4 +1,4 @@
-import { NgForOf, UpperCasePipe } from '@angular/common';
+import { NgForOf, NgIf, UpperCasePipe } from '@angular/common';
 import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -13,7 +13,7 @@ import { FormFieldErrorsModule } from 'src/app/directives/form-field-errors/form
 import { DialogData, DialogResult, UserForm } from 'src/app/interfaces/user-editor-dialog';
 import { fromUsers } from 'src/app/store/users';
 import { usersActions } from 'src/app/store/users/users.action';
-import { ROLE, ROLE_OPTIONS } from 'src/app/utils/constants';
+import { PASSWORD_MIN_LENGTH, ROLE, ROLE_OPTIONS } from 'src/app/utils/constants';
 
 const imports = [
   FormFieldErrorsModule,
@@ -23,6 +23,7 @@ const imports = [
   MatInputModule,
   MatSelectModule,
   NgForOf,
+  NgIf,
   ReactiveFormsModule,
   UpperCasePipe,
 ];
@@ -41,6 +42,16 @@ export class UserEditorDialogComponent implements OnInit {
   private destroyRef = inject(DestroyRef);
   private destroyed = new Subject<void>();
 
+  editMode = this.dialogData.editMode;
+  user = this.dialogData.user;
+  userForm: UserForm = this.fb.group({
+    username: ['', [Validators.required]],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(PASSWORD_MIN_LENGTH)]],
+    role: this.fb.control<ROLE>(ROLE.user, [Validators.required]),
+  });
+  roleOptions = ROLE_OPTIONS;
+
   ngOnInit(): void {
     this.destroyRef.onDestroy(() => {
       this.destroyed.next();
@@ -57,20 +68,26 @@ export class UserEditorDialogComponent implements OnInit {
         this.store.dispatch(usersActions.resetSuccessStatus());
         this.dialogRef.close(true);
       });
-  }
 
-  editMode = this.dialogData.editMode;
-  userForm: UserForm = this.fb.group({
-    username: ['', [Validators.required]],
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(6)]],
-    role: this.fb.control<ROLE>(ROLE.user, [Validators.required]),
-  });
-  roleOptions = ROLE_OPTIONS;
+    if (this.user && this.editMode) {
+      const { email, username, role } = this.user;
+      this.userForm.patchValue({ email, username, role });
+      this.userForm.controls.password.setValidators(Validators.minLength(PASSWORD_MIN_LENGTH));
+      this.userForm.controls.email.disable();
+    }
+  }
 
   saveUser() {
     if (this.userForm.invalid) return;
 
-    this.store.dispatch(usersActions.createUser({ ...this.userForm.getRawValue() }));
+    const userFormValue = this.userForm.getRawValue();
+
+    if (this.editMode && this.user) {
+      const editedUser = { ...userFormValue, id: this.user.uid, email: this.user.email };
+      this.store.dispatch(usersActions.editUser(editedUser));
+      return;
+    }
+
+    this.store.dispatch(usersActions.createUser(userFormValue));
   }
 }

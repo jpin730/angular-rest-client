@@ -1,13 +1,7 @@
 <form [formGroup]="userForm" (ngSubmit)="saveUser()" class="w-80 p-5 pt-3">
   <h2 mat-dialog-title class="mat-h2 mb-3 p-0">{{ editMode ? 'Edit' : 'Create' }} user</h2>
 
-  <mat-dialog-content class="flex flex-col p-0 pt-3">
-    <mat-form-field appearance="outline">
-      <mat-label>Username</mat-label>
-      <input matInput formControlName="username" type="text" />
-      <mat-error />
-    </mat-form-field>
-
+  <mat-dialog-content class="flex flex-col gap-3 p-0 pt-3">
     <mat-form-field appearance="outline">
       <mat-label>Email</mat-label>
       <input matInput formControlName="email" type="email" />
@@ -15,8 +9,15 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline">
+      <mat-label>Username</mat-label>
+      <input matInput formControlName="username" type="text" />
+      <mat-error />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
       <mat-label>Password</mat-label>
       <input matInput formControlName="password" type="password" />
+      <mat-hint *ngIf="editMode">Leave empty to make no changes</mat-hint>
       <mat-error />
     </mat-form-field>
 
@@ -32,6 +33,13 @@
 
   <mat-dialog-actions align="end" class="p-0">
     <button mat-stroked-button mat-dialog-close type="button" class="w-24">Cancel</button>
-    <button mat-flat-button color="primary" type="submit" class="w-24">Save</button>
+    <button
+      mat-flat-button
+      color="primary"
+      type="submit"
+      class="w-24"
+      [disabled]="editMode && userForm.pristine">
+      Save
+    </button>
   </mat-dialog-actions>
 </form>
