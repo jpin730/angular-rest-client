@@ -1,0 +1,12 @@
+<div class="flex w-80 flex-col gap-3 p-5">
+  <h2 mat-dialog-title class="mat-h2 p-0">Confirm</h2>
+
+  <mat-dialog-content class="p-0"> {{ message }} </mat-dialog-content>
+
+  <mat-dialog-actions align="end" class="p-0">
+    <button mat-stroked-button mat-dialog-close type="button" class="w-24">Cancel</button>
+    <button mat-flat-button [mat-dialog-close]="true" color="primary" type="button" class="w-24">
+      Confirm
+    </button>
+  </mat-dialog-actions>
+</div>

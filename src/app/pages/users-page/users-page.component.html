@@ -20,7 +20,9 @@
     </div>
   </div>
 
-  <button mat-flat-button color="primary" (click)="openUserEditor()">Add user</button>
+  <button mat-flat-button color="primary" class="w-full sm:w-28" (click)="openUserEditor()">
+    Add user
+  </button>
 </div>
 
 <div *ngIf="users$ | async as users" class="overflow-hidden rounded border bg-white pb-2 sm:pb-0">
@@ -91,7 +93,7 @@
               <span>Copy id</span>
             </button>
 
-            <button mat-menu-item>
+            <button mat-menu-item (click)="confirmDeletion(element)">
               <mat-icon color="warn">delete</mat-icon>
               <span class="text-warn">Delete</span>
             </button>

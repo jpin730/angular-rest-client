@@ -2,12 +2,10 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { ROLE } from '../utils/constants';
 import { User } from './user';
 
-export interface DialogData {
+export interface UserEditorDialogData {
   editMode: boolean;
   user?: User;
 }
-
-export type DialogResult = true;
 
 export type UserForm = FormGroup<{
   username: FormControl<string>;

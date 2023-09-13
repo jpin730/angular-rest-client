@@ -17,6 +17,9 @@ export const usersActions = createActionGroup({
     'Edit User': props<UserFormValue & { id: string }>(),
     'Edit User Success': emptyProps(),
     'Edit User Failure': emptyProps(),
+    'Delete User': props<{ id: string }>(),
+    'Delete User Success': emptyProps(),
+    'Delete User Failure': emptyProps(),
     'Reset Success Status': emptyProps(),
   },
 });

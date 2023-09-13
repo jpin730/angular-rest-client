@@ -1,11 +1,11 @@
 import { AsyncPipe, NgIf } from '@angular/common';
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -13,11 +13,13 @@ import { Store } from '@ngrx/store';
 import { BoolIconDirective } from 'src/app/directives/bool-icon.directive';
 import { fromUsers } from 'src/app/store/users';
 import { DEBOUNCE_TIME, PAGINATOR_SIZE_OPTIONS, ROLE } from 'src/app/utils/constants';
-import { debounceTime, map } from 'rxjs';
+import { Subject, debounceTime, filter, map, takeUntil, tap } from 'rxjs';
 import { usersActions } from 'src/app/store/users/users.action';
 import { UserEditorDialogComponent } from 'src/app/components/user-editor-dialog/user-editor-dialog.component';
-import { DialogData, DialogResult } from 'src/app/interfaces/user-editor-dialog';
+import { UserEditorDialogData } from 'src/app/interfaces/user-editor-dialog';
+import { ConfirmDialogData, ConfirmDialogResult } from 'src/app/interfaces/confirm-dialog';
 import { User } from 'src/app/interfaces/user';
+import { ConfirmDialogComponent } from 'src/app/components/confirm-dialog/confirm-dialog.component';
 
 const imports = [
   AsyncPipe,
@@ -42,6 +44,8 @@ const imports = [
 export class UsersPageComponent implements OnInit {
   private store = inject(Store);
   private dialog = inject(MatDialog);
+  private destroyRef = inject(DestroyRef);
+  private destroyed = new Subject<void>();
 
   displayedColumns: string[] = ['avatar', 'email', 'username', 'role', 'google', 'actions'];
   paginator!: Pick<MatPaginator, 'length' | 'pageSize' | 'pageIndex'>;
@@ -55,8 +59,28 @@ export class UsersPageComponent implements OnInit {
   searchControl = new FormControl('', { nonNullable: true });
   searchFocus = false;
   pageSizeOptions = PAGINATOR_SIZE_OPTIONS;
+  userEditorDialogRef?: MatDialogRef<UserEditorDialogComponent>;
+  confirmDialogRef?: MatDialogRef<ConfirmDialogComponent, ConfirmDialogResult>;
 
   ngOnInit(): void {
+    this.destroyRef.onDestroy(() => {
+      this.destroyed.next();
+      this.destroyed.complete();
+    });
+
+    this.store
+      .select(fromUsers.success)
+      .pipe(
+        takeUntil(this.destroyed),
+        filter((success) => success),
+      )
+      .subscribe(() => {
+        this.userEditorDialogRef?.close();
+        this.confirmDialogRef?.close();
+        this.fetchUsers();
+        this.store.dispatch(usersActions.resetSuccessStatus());
+      });
+
     this.searchControl.valueChanges.pipe(debounceTime(DEBOUNCE_TIME)).subscribe(() => {
       this.paginator.pageIndex = 0;
       this.fetchUsers();
@@ -84,11 +108,23 @@ export class UsersPageComponent implements OnInit {
   }
 
   openUserEditor(user?: User) {
-    const dialogRef = this.dialog.open<UserEditorDialogComponent, DialogData, DialogResult>(
+    this.userEditorDialogRef = this.dialog.open<UserEditorDialogComponent, UserEditorDialogData>(
       UserEditorDialogComponent,
       { data: { editMode: !!user, user } },
     );
+  }
 
-    dialogRef.afterClosed().subscribe((success) => success && this.fetchUsers());
+  confirmDeletion({ username, email, uid: id }: User) {
+    const message = `Do you want to remove user: ${username} (${email})?`;
+    this.confirmDialogRef = this.dialog.open<
+      ConfirmDialogComponent,
+      ConfirmDialogData,
+      ConfirmDialogResult
+    >(ConfirmDialogComponent, { data: { message } });
+
+    this.confirmDialogRef
+      .afterClosed()
+      .pipe(tap((success) => success && this.store.dispatch(usersActions.deleteUser({ id }))))
+      .subscribe();
   }
 }

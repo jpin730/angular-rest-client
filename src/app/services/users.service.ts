@@ -27,4 +27,8 @@ export class UsersService {
   editUser({ id, password, ...user }: UserFormValue & { id: string }) {
     return this.http.put(`${this.baseURL}/${id}`, { ...user, password: password || undefined });
   }
+
+  deleteUser(id: string) {
+    return this.http.delete(`${this.baseURL}/${id}`);
+  }
 }
