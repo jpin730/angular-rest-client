@@ -114,8 +114,8 @@ export class UsersPageComponent implements OnInit {
     );
   }
 
-  confirmDeletion({ username, email, uid: id }: User) {
-    const message = `Do you want to remove user: ${username} (${email})?`;
+  confirmDeletion({ username, uid: id }: User) {
+    const message = `Do you want to delete ${username}?`;
     this.confirmDialogRef = this.dialog.open<
       ConfirmDialogComponent,
       ConfirmDialogData,
