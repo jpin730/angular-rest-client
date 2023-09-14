@@ -3,11 +3,7 @@ import { Injectable, inject } from '@angular/core';
 
 import { environment } from 'src/environments/environment';
 import { REFRESH_TOKEN } from '../interceptors/token.interceptor';
-import {
-  GetAuthCheck,
-  PostAuthLogin,
-  PostAuthLoginWithGoogle,
-} from '../interfaces/api-auth-responses';
+import { GetAuthCheck, PostAuthLogin, PostAuthLoginWithGoogle } from '../types/api-auth-responses';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {

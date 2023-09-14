@@ -6,7 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { authActions } from './auth.action';
 import { Router } from '@angular/router';
 import { PATH } from 'src/app/utils/constants';
-import { GoogleClientLibrary } from 'src/app/interfaces/google-client-library';
+import { GoogleClientLibrary } from 'src/app/types/google-client-library';
 
 declare let google: GoogleClientLibrary;
 

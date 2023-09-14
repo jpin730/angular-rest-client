@@ -1,7 +1,7 @@
 import { createSelector } from '@ngrx/store';
 
 import { selectAuth } from '..';
-import { User } from 'src/app/interfaces/user';
+import { User } from 'src/app/types/user';
 import { ROLE } from 'src/app/utils/constants';
 
 export const isLoading = createSelector(selectAuth, (state) => state.loading);

@@ -7,14 +7,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 
-import { SidenavListItem } from 'src/app/interfaces/side-nav-list-item';
+import { SidenavListItem } from 'src/app/types/side-nav-list-item';
 import { media$ } from 'src/app/utils/media';
 import { BREAKPOINT, PATH, SIDE_NAVE_LIST } from 'src/app/utils/constants';
 import { Subject, map, takeUntil } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { authActions } from 'src/app/store/auth/auth.action';
 import { fromAuth } from 'src/app/store/auth';
-import { User } from 'src/app/interfaces/user';
+import { User } from 'src/app/types/user';
 
 const imports = [
   AsyncPipe,

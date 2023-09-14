@@ -16,9 +16,9 @@ import { DEBOUNCE_TIME, PAGINATOR_SIZE_OPTIONS, ROLE } from 'src/app/utils/const
 import { Subject, debounceTime, filter, map, takeUntil, tap } from 'rxjs';
 import { usersActions } from 'src/app/store/users/users.action';
 import { UserEditorDialogComponent } from 'src/app/components/user-editor-dialog/user-editor-dialog.component';
-import { UserEditorDialogData } from 'src/app/interfaces/user-editor-dialog';
-import { ConfirmDialogData, ConfirmDialogResult } from 'src/app/interfaces/confirm-dialog';
-import { User } from 'src/app/interfaces/user';
+import { UserEditorDialogData } from 'src/app/types/user-editor-dialog';
+import { ConfirmDialogData, ConfirmDialogResult } from 'src/app/types/confirm-dialog';
+import { User } from 'src/app/types/user';
 import { ConfirmDialogComponent } from 'src/app/components/confirm-dialog/confirm-dialog.component';
 
 const imports = [

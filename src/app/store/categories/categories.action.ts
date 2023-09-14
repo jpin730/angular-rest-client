@@ -1,7 +1,7 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 
-import { GetCategories } from 'src/app/interfaces/api-categories-responses';
-import { CategoryFormValue } from 'src/app/interfaces/category-editor-dialog';
+import { GetCategories } from 'src/app/types/api-categories-responses';
+import { CategoryFormValue } from 'src/app/types/category-editor-dialog';
 
 export const categoriesActions = createActionGroup({
   source: 'Categories',

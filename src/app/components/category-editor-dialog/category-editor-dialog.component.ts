@@ -6,7 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Store } from '@ngrx/store';
 
-import { CategoryEditorDialogData, CategoryForm } from 'src/app/interfaces/category-editor-dialog';
+import { CategoryEditorDialogData, CategoryForm } from 'src/app/types/category-editor-dialog';
 import { categoriesActions } from 'src/app/store/categories/categories.action';
 
 const imports = [

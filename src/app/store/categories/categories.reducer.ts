@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 
-import { GetCategories } from 'src/app/interfaces/api-categories-responses';
+import { GetCategories } from 'src/app/types/api-categories-responses';
 import { categoriesActions } from './categories.action';
 
 export interface CategoriesState extends GetCategories {

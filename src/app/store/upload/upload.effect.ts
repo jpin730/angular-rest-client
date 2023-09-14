@@ -5,8 +5,8 @@ import { HttpEventType, HttpResponse } from '@angular/common/http';
 
 import { UploadService } from 'src/app/services/upload.service';
 import { uploadActions } from './upload.action';
-import { PutUploadAvatar } from 'src/app/interfaces/api-upload-responses';
-import { User } from 'src/app/interfaces/user';
+import { PutUploadAvatar } from 'src/app/types/api-upload-responses';
+import { User } from 'src/app/types/user';
 import { authActions } from '../auth/auth.action';
 import { ToastService } from 'src/app/services/toast.service';
 

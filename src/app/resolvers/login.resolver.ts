@@ -1,6 +1,6 @@
 import { ResolveFn } from '@angular/router';
 import { filter, interval, startWith, take } from 'rxjs';
-import { GoogleClientLibrary } from '../interfaces/google-client-library';
+import { GoogleClientLibrary } from '../types/google-client-library';
 
 declare let google: GoogleClientLibrary | undefined;
 

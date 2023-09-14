@@ -1,5 +1,5 @@
-import { ApiParsedErrorMessage } from 'src/app/interfaces/api-parsed-error-message';
-import { SidenavListItem } from '../interfaces/side-nav-list-item';
+import { ApiParsedErrorMessage } from 'src/app/types/api-parsed-error-message';
+import { SidenavListItem } from '../types/side-nav-list-item';
 
 export enum BREAKPOINT {
   'sm' = '640px',

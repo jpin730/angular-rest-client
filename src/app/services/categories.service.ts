@@ -3,8 +3,8 @@ import { Injectable, inject } from '@angular/core';
 
 import { environment } from 'src/environments/environment';
 import { API_DEFAULT_LIMIT, API_DEFAULT_OFFSET } from '../utils/constants';
-import { GetCategories } from '../interfaces/api-categories-responses';
-import { CategoryFormValue } from '../interfaces/category-editor-dialog';
+import { GetCategories } from '../types/api-categories-responses';
+import { CategoryFormValue } from '../types/category-editor-dialog';
 
 @Injectable({
   providedIn: 'root',

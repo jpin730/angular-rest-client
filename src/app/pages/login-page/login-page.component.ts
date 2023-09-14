@@ -16,7 +16,7 @@ import { Store } from '@ngrx/store';
 import { Subject, takeUntil } from 'rxjs';
 
 import { FormFieldErrorsModule } from 'src/app/directives/form-field-errors/form-field-errors.module';
-import { GoogleClientLibrary } from 'src/app/interfaces/google-client-library';
+import { GoogleClientLibrary } from 'src/app/types/google-client-library';
 import { authActions } from 'src/app/store/auth/auth.action';
 import { BREAKPOINT, PASSWORD_MIN_LENGTH } from 'src/app/utils/constants';
 import { media$ } from 'src/app/utils/media';

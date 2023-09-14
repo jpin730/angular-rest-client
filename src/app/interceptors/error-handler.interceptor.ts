@@ -2,7 +2,7 @@ import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { catchError, throwError } from 'rxjs';
 import { inject } from '@angular/core';
 
-import { ApiErrorMessage } from '../interfaces/api-error-messages';
+import { ApiErrorMessage } from '../types/api-error-messages';
 import { API_PARSED_ERROR_MESSAGES } from 'src/app/utils/constants';
 import { ToastService } from '../services/toast.service';
 

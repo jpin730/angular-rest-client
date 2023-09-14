@@ -4,7 +4,7 @@ import { switchMap, take, tap } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { environment } from 'src/environments/environment';
-import { PutUploadAvatar } from '../interfaces/api-upload-responses';
+import { PutUploadAvatar } from '../types/api-upload-responses';
 import { uploadActions } from '../store/upload/upload.action';
 import { fromAuth } from '../store/auth';
 

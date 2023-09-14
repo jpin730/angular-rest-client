@@ -9,7 +9,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { Store } from '@ngrx/store';
 
 import { FormFieldErrorsModule } from 'src/app/directives/form-field-errors/form-field-errors.module';
-import { UserEditorDialogData, UserForm } from 'src/app/interfaces/user-editor-dialog';
+import { UserEditorDialogData, UserForm } from 'src/app/types/user-editor-dialog';
 import { usersActions } from 'src/app/store/users/users.action';
 import { PASSWORD_MIN_LENGTH, ROLE, ROLE_OPTIONS } from 'src/app/utils/constants';
 
