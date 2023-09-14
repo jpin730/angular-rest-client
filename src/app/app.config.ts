@@ -18,6 +18,7 @@ import { uploadEffect } from './store/upload';
 import { usersEffects } from './store/users';
 import { provideDialogConfig } from './providers/dialog-config';
 import { providePaginatorIntl } from './providers/paginator-intl';
+import { categoriesEffects } from './store/categories';
 
 const interceptors = [tokenInterceptor, errorHandlerInterceptor];
 
@@ -29,7 +30,7 @@ export const appConfig: ApplicationConfig = {
     provideStore(reducers),
     provideRouterStore({ stateKey: 'router' }),
     provideStoreDevtools(),
-    provideEffects(appEffects, authEffects, uploadEffect, usersEffects),
+    provideEffects(appEffects, authEffects, uploadEffect, usersEffects, categoriesEffects),
     provideToastr(),
     providePaginatorIntl(),
     provideDialogConfig(),
