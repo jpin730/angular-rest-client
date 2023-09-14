@@ -7,6 +7,7 @@ import { routerNavigatedAction } from '@ngrx/router-store';
 import { usersActions } from '../users/users.action';
 import { PATH } from 'src/app/utils/constants';
 import { categoriesActions } from '../categories/categories.action';
+import { productsActions } from '../products/products.action';
 
 export const init = createEffect(
   (actions$ = inject(Actions)) =>
@@ -39,6 +40,16 @@ export const initCategories = createEffect(
       ofType(routerNavigatedAction),
       filter(({ payload }) => payload.routerState.url.includes(PATH.categories)),
       exhaustMap(() => of(categoriesActions.getCategories({}))),
+    ),
+  { functional: true },
+);
+
+export const initProducts = createEffect(
+  (actions$ = inject(Actions)) =>
+    actions$.pipe(
+      ofType(routerNavigatedAction),
+      filter(({ payload }) => payload.routerState.url.includes(PATH.products)),
+      exhaustMap(() => of(productsActions.getProducts({}))),
     ),
   { functional: true },
 );

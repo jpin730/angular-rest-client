@@ -20,7 +20,7 @@ export const getCategories = createEffect(
   { functional: true },
 );
 
-export const searchUsers = createEffect(
+export const searchCategories = createEffect(
   (actions$ = inject(Actions), categoriesService = inject(CategoriesService)) =>
     actions$.pipe(
       ofType(categoriesActions.searchCategories),
