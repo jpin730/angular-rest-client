@@ -1,0 +1,23 @@
+<form [formGroup]="categoryForm" (ngSubmit)="saveCategory()" class="max-w-xs p-5 pt-3">
+  <h2 mat-dialog-title class="mat-h2 mb-3 p-0">{{ editMode ? 'Edit' : 'Create' }} category</h2>
+
+  <mat-dialog-content class="flex flex-col gap-3 p-0 pt-3">
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" type="text" />
+      <mat-error />
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end" class="p-0">
+    <button mat-stroked-button mat-dialog-close type="button" class="w-24">Cancel</button>
+    <button
+      mat-flat-button
+      color="primary"
+      type="submit"
+      class="w-24"
+      [disabled]="editMode && categoryForm.pristine">
+      Save
+    </button>
+  </mat-dialog-actions>
+</form>
