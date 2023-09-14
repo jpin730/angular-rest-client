@@ -54,7 +54,7 @@ export class CategoriesPageComponent implements OnInit {
     map(({ categories, total, limit, offset }) => {
       this.paginator = { length: total, pageSize: limit, pageIndex: offset / limit };
       return new MatTableDataSource(
-        categories.map(({ _id, name, user }) => ({ id: _id, name, username: user.username })),
+        categories.map(({ _id, name, user }) => ({ _id, name, username: user.username })),
       );
     }),
   );
