@@ -8,3 +8,5 @@ export interface User {
   avatar: string;
   uid: string;
 }
+
+export type UserFormValue = Pick<User, 'email' | 'username' | 'role'> & { password: string };

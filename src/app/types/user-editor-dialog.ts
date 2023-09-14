@@ -12,5 +12,3 @@ export type UserForm = FormGroup<{
   password: FormControl<string>;
   role: FormControl<ROLE>;
 }>;
-
-export type UserFormValue = Pick<User, 'email' | 'username' | 'role'> & { password: string };

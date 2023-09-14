@@ -9,5 +9,3 @@ export interface CategoryEditorDialogData {
 export type CategoryForm = FormGroup<{
   name: FormControl<string>;
 }>;
-
-export type CategoryFormValue = Pick<Category, 'name'>;

@@ -5,3 +5,5 @@ export interface Category {
   name: string;
   user: Pick<User, 'username'> & { _id: string };
 }
+
+export type CategoryFormValue = Pick<Category, 'name'>;
