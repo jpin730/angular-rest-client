@@ -3,7 +3,6 @@ import { ROLE } from '../utils/constants';
 import { User } from './user';
 
 export interface UserEditorDialogData {
-  editMode: boolean;
   user?: User;
 }
 

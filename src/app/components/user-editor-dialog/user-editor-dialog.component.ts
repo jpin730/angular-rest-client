@@ -37,8 +37,8 @@ export class UserEditorDialogComponent implements OnInit {
   private fb = inject(FormBuilder).nonNullable;
   private store = inject(Store);
 
-  editMode = this.dialogData.editMode;
   user = this.dialogData.user;
+  editMode = !!this.user;
   userForm: UserForm = this.fb.group({
     username: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],

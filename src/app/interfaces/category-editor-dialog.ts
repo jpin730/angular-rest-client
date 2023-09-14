@@ -3,7 +3,6 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Category } from './category';
 
 export interface CategoryEditorDialogData {
-  editMode: boolean; // TODO: refactor to remove this prop
   category?: Category;
 }
 

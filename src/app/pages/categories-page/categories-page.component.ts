@@ -113,7 +113,7 @@ export class CategoriesPageComponent implements OnInit {
     this.categoryEditorDialogRef = this.dialog.open<
       CategoryEditorDialogComponent,
       CategoryEditorDialogData
-    >(CategoryEditorDialogComponent, { data: { editMode: !!category, category } });
+    >(CategoryEditorDialogComponent, { data: { category } });
   }
 
   confirmDeletion({ name, _id: id }: Category) {

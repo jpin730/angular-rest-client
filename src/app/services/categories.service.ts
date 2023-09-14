@@ -12,6 +12,7 @@ import { CategoryFormValue } from '../interfaces/category-editor-dialog';
 export class CategoriesService {
   private http = inject(HttpClient);
   private baseURL = `${environment.apiURL}/category`;
+  private searchBaseURL = `${environment.apiURL}/search/categories`;
 
   getCategories(limit = API_DEFAULT_LIMIT, offset = API_DEFAULT_OFFSET) {
     const params = new HttpParams({ fromObject: { limit, offset } });
@@ -20,9 +21,9 @@ export class CategoriesService {
 
   searchCategories(query: string, limit = API_DEFAULT_LIMIT, offset = API_DEFAULT_OFFSET) {
     const params = new HttpParams({ fromObject: { limit, offset } });
-    return this.http.get<GetCategories>(`${environment.apiURL}/search/categories/${query}`, {
+    return this.http.get<GetCategories>(`${this.searchBaseURL}//${query}`, {
       params,
-    }); // TODO: refactor as searchBaseUrl
+    });
   }
 
   createCategory(category: CategoryFormValue) {

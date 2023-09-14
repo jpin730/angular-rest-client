@@ -110,7 +110,7 @@ export class UsersPageComponent implements OnInit {
   openUserEditor(user?: User) {
     this.userEditorDialogRef = this.dialog.open<UserEditorDialogComponent, UserEditorDialogData>(
       UserEditorDialogComponent,
-      { data: { editMode: !!user, user } },
+      { data: { user } },
     );
   }
 

@@ -28,8 +28,8 @@ export class CategoryEditorDialogComponent implements OnInit {
   private fb = inject(FormBuilder).nonNullable;
   private store = inject(Store);
 
-  editMode = this.dialogData.editMode;
   category = this.dialogData.category;
+  editMode = !!this.category;
   categoryForm: CategoryForm = this.fb.group({
     name: ['', [Validators.required]],
   });
