@@ -19,7 +19,7 @@ export class ProductsService {
 
   searchProducts(query: string, limit = API_DEFAULT_LIMIT, offset = API_DEFAULT_OFFSET) {
     const params = new HttpParams({ fromObject: { limit, offset } });
-    return this.http.get<GetProducts>(`${this.searchBaseURL}//${query}`, {
+    return this.http.get<GetProducts>(`${this.searchBaseURL}/${query}`, {
       params,
     });
   }
