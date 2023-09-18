@@ -7,6 +7,7 @@ export const categoriesActions = createActionGroup({
   source: 'Categories',
   events: {
     'Get Categories': props<{ limit?: number; offset?: number }>(),
+    'Get All Categories': emptyProps(),
     'Get Categories Success': props<GetCategories>(),
     'Get Categories Failure': emptyProps(),
     'Search Categories': props<{ query: string; limit?: number; offset?: number }>(),

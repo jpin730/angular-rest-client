@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, exhaustMap, map, of, tap } from 'rxjs';
+import { catchError, exhaustMap, map, of, switchMap, tap } from 'rxjs';
 
 import { CategoriesService } from 'src/app/services/categories.service';
 import { ToastService } from 'src/app/services/toast.service';
@@ -12,6 +12,21 @@ export const getCategories = createEffect(
       ofType(categoriesActions.getCategories),
       exhaustMap(({ limit, offset }) =>
         categoriesService.getCategories(limit, offset).pipe(
+          map((res) => categoriesActions.getCategoriesSuccess(res)),
+          catchError(() => of(categoriesActions.getCategoriesFailure())),
+        ),
+      ),
+    ),
+  { functional: true },
+);
+
+export const getAllCategories = createEffect(
+  (actions$ = inject(Actions), categoriesService = inject(CategoriesService)) =>
+    actions$.pipe(
+      ofType(categoriesActions.getAllCategories),
+      exhaustMap(() =>
+        categoriesService.getCategories(1).pipe(
+          switchMap(({ total }) => categoriesService.getCategories(total)),
           map((res) => categoriesActions.getCategoriesSuccess(res)),
           catchError(() => of(categoriesActions.getCategoriesFailure())),
         ),
