@@ -21,7 +21,7 @@ export class CategoriesService {
 
   searchCategories(query: string, limit = API_DEFAULT_LIMIT, offset = API_DEFAULT_OFFSET) {
     const params = new HttpParams({ fromObject: { limit, offset } });
-    return this.http.get<GetCategories>(`${this.searchBaseURL}//${query}`, {
+    return this.http.get<GetCategories>(`${this.searchBaseURL}/${query}`, {
       params,
     });
   }
