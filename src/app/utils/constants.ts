@@ -48,3 +48,5 @@ export const PAGINATOR_SIZE_OPTIONS = [5, 10, 20];
 export const DEBOUNCE_TIME = 300;
 
 export const PASSWORD_MIN_LENGTH = 6;
+
+export const DECIMAL_REGEXP = /^-?\d+(\.\d+)?$/;

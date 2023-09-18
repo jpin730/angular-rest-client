@@ -2,7 +2,7 @@
   <div
     class="h-9 w-full rounded bg-white sm:w-1/2"
     [class]="searchFocus ? 'border-primary border-2 p-0' : 'border p-px'"
-    title="Search by id, email or username">
+    title="Search by name or id">
     <div class="flex h-full items-center justify-between gap-2 px-2">
       <mat-icon class="text-gray-200" fontIcon="search" />
       <input
@@ -58,7 +58,7 @@
                 <mat-icon>edit</mat-icon>
                 <span>Edit</span>
               </button>
-              <button mat-menu-item [cdkCopyToClipboard]="element.id">
+              <button mat-menu-item [cdkCopyToClipboard]="element._id">
                 <mat-icon>content_copy</mat-icon>
                 <span>Copy id</span>
               </button>
