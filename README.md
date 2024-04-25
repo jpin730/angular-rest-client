@@ -28,10 +28,6 @@ Build app in production mode
 yarn build
 ```
 
-## App hosting
-
-https://angular-rest-client-jpin730.vercel.app
-
 ## Backend Repository
 
 https://github.com/jpin730/node-rest-server
